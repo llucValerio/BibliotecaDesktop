@@ -15,7 +15,7 @@ namespace Biblioteca.Classes
         /*
          * VARIABLES CLASSE
          */
-        OleDbConnection con = new OleDbConnection("Provider = Microsoft.ACE.OLEDB.12.0; Data Source = BBDD/Biblioteca2020.accdb");
+        OleDbConnection con = new OleDbConnection("Provider = Microsoft.ACE.OLEDB.12.0; Data Source = Resources/Biblioteca2020.accdb");
         /*
          * CONSULTES
          */
