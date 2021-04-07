@@ -12,13 +12,13 @@ namespace Biblioteca.Classes
 {    
     public class SqlCon
     {
-        // *******************************************************************
-        // ************************ VARIABLES CLASSE *************************
-        // *******************************************************************
+        /*
+         * VARIABLES CLASSE
+         */
         OleDbConnection con = new OleDbConnection("Provider = Microsoft.ACE.OLEDB.12.0; Data Source = BBDD/Biblioteca2020.accdb");
-        // *******************************************************************
-        // **************************** CONSULTES ****************************
-        // *******************************************************************
+        /*
+         * CONSULTES
+         */
         //RETORNA UN DATAGRID
         public bool GetData(string sqlQuery, ref DataTable dt)
         {
@@ -63,25 +63,7 @@ namespace Biblioteca.Classes
                 return IdAutor;
             }
         }
-        public int GetLastIndex(string taula)
-        {
-            try
-            {
-                con.Open();
-                OleDbCommand cmd = con.CreateCommand();
-                cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "SELECT @@IDENTITY FROM " + taula;
-                int id = (Int32)cmd.ExecuteScalar();
-                con.Close();
-                return id;
-            }
-            catch (Exception e)
-            {
-                con.Close();
-                MessageBox.Show(e.Message, "Error en l'aplicatiu.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return 0;
-            }
-        }
+        // RETORNA EL ID DE LA TAULA ESTIL EN FUNCIÓ D'UN ESTIL
         public int GetIdEstil(string estil)
         {
             try
@@ -101,35 +83,10 @@ namespace Biblioteca.Classes
                 return 0;
             }
         }
-        public bool GetEstilAutorNou(int idEstil, int idAutor)
-        {
-            try
-            {
-                con.Open();
-                OleDbCommand cmd = con.CreateCommand();
-                cmd.CommandType = CommandType.Text;
-                cmd.CommandText = "SELECT * FROM ESTIL_AUTOR WHERE IdEstil=" + idEstil + " AND IdAutor=" + idAutor;
-                int rowsAffected = cmd.ExecuteNonQuery();
-                con.Close();
-                if (rowsAffected > 0)
-                {
-                    return false;
-                }
-                else
-                {
-                    return true;
-                }
-            }
-            catch (Exception e)
-            {
-                con.Close();
-                MessageBox.Show(e.Message, "Error en l'aplicatiu.", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
-            }
-        }
-        // *******************************************************************
-        // ******************* INSERT / UPDATE / DELETE **********************
-        // *******************************************************************
+        /*
+         * INSERT / UPDATE / DELETE
+         */
+        // FUNCIÓ GENÈRICA DE MODIFICACIÓ DE TAULA SENSE RETORN       
         public int InsUpdDel(string sqlQuery)
         {
             try
@@ -149,5 +106,128 @@ namespace Biblioteca.Classes
                 return 0;
             }
         }
+        // INSERTAR AUTOR PER PARAMETRE RECUPERANT EL ID ASSIGNAT PER LA BBDD
+        public int InsertAutor(string sqlQuery, string nom, string cognoms, string nacionalitat, DateTime data, string comentaris)
+        {
+            try
+            {
+                con.Open();
+                OleDbCommand cmd = con.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sqlQuery;
+                cmd.Parameters.Add("p1", OleDbType.VarChar, 50).Value = nom;
+                cmd.Parameters.Add("p2", OleDbType.VarChar, 50).Value = cognoms;
+                cmd.Parameters.Add("p3", OleDbType.VarChar, 50).Value = nacionalitat;
+                cmd.Parameters.Add("p4", OleDbType.DBDate).Value = data;
+                cmd.Parameters.Add("p5", OleDbType.VarChar, 50).Value = comentaris;
+                //
+                cmd.ExecuteNonQuery();
+                //
+                cmd.CommandText = "SELECT @@IDENTITY FROM AUTORS";
+                int idAutor = (Int32)cmd.ExecuteScalar();
+                con.Close();
+                return idAutor;
+            }
+            catch (Exception e)
+            {
+                con.Close();
+                MessageBox.Show(e.Message, "Error en l'aplicatiu.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return 0;
+            }
+        }
+        // INSERTAR LLIBRE PER PARAMETRE RECUPERANT EL ID ASSIGNAT PER LA BBDD
+        public int InsertLlibre(string sqlQuery, string titol, DateTime any, string editor, string col, int numEdicio, string tipusCoberta, DateTime dataCompra, int numPag, string comentaris, int idIdioma, int idLocal)
+        {
+            try
+            {
+                con.Open();
+                OleDbCommand cmd = con.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sqlQuery;
+                cmd.Parameters.Add("p1", OleDbType.VarChar, 50).Value = titol;
+                cmd.Parameters.Add("p2", OleDbType.DBDate).Value = any;
+                cmd.Parameters.Add("p3", OleDbType.VarChar, 50).Value = editor;
+                cmd.Parameters.Add("p4", OleDbType.VarChar, 50).Value = col;
+                cmd.Parameters.Add("p5", OleDbType.Integer).Value = numEdicio;
+                cmd.Parameters.Add("p6", OleDbType.VarChar, 50).Value = tipusCoberta;
+                cmd.Parameters.Add("p7", OleDbType.DBDate).Value = dataCompra;
+                cmd.Parameters.Add("p8", OleDbType.Integer).Value = numPag;
+                cmd.Parameters.Add("p9", OleDbType.VarChar, 50).Value = comentaris;
+                cmd.Parameters.Add("p10", OleDbType.Integer).Value = idIdioma;
+                cmd.Parameters.Add("p11", OleDbType.Integer).Value = idLocal;
+                //
+                cmd.ExecuteNonQuery();
+                //
+                cmd.CommandText = "SELECT @@IDENTITY FROM AUTORS";
+                int idLlibre = (Int32)cmd.ExecuteScalar();
+                con.Close();
+                return idLlibre;
+            }
+            catch (Exception e)
+            {
+                con.Close();
+                MessageBox.Show(e.Message, "Error en l'aplicatiu.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return 0;
+            }
+        }
+        // ACTUALITZAR AUTOR PER PARAMETRE
+        public int UpdateAutor(string sqlQuery, string nom, string cognoms, string nacionalitat, DateTime data, string comentaris)
+        {
+            try
+            {
+                con.Open();
+                OleDbCommand cmd = con.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sqlQuery;
+                cmd.Parameters.Add("p1", OleDbType.VarChar, 50).Value = nom;
+                cmd.Parameters.Add("p2", OleDbType.VarChar, 50).Value = cognoms;
+                cmd.Parameters.Add("p3", OleDbType.VarChar, 50).Value = nacionalitat;
+                cmd.Parameters.Add("p4", OleDbType.DBDate).Value = data;
+                cmd.Parameters.Add("p5", OleDbType.VarChar, 50).Value = comentaris;
+                //
+                cmd.ExecuteNonQuery();
+                con.Close();
+                return 1;
+            }
+            catch (Exception e)
+            {
+                con.Close();
+                MessageBox.Show(e.Message, "Error en l'aplicatiu.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return 0;
+            }
+        }
+        // ACTUALITZAR LLIBRE PER PARAMETRE
+        public int UpdateLlibre(string sqlQuery, string titol, DateTime any, string editor, string col, int numEdicio, string tipusCoberta, DateTime dataCompra, int numPag, string comentaris, int idIdioma, int idLocal)
+        {
+            try
+            {
+                con.Open();
+                OleDbCommand cmd = con.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sqlQuery;
+                cmd.Parameters.Add("p1", OleDbType.VarChar, 50).Value = titol;
+                cmd.Parameters.Add("p2", OleDbType.DBDate).Value = any;
+                cmd.Parameters.Add("p3", OleDbType.VarChar, 50).Value = editor;
+                cmd.Parameters.Add("p4", OleDbType.VarChar, 50).Value = col;
+                cmd.Parameters.Add("p5", OleDbType.Integer).Value = numEdicio;
+                cmd.Parameters.Add("p6", OleDbType.VarChar, 50).Value = tipusCoberta;
+                cmd.Parameters.Add("p7", OleDbType.DBDate).Value = dataCompra;
+                cmd.Parameters.Add("p8", OleDbType.Integer).Value = numPag;
+                cmd.Parameters.Add("p9", OleDbType.VarChar, 50).Value = comentaris;
+                cmd.Parameters.Add("p10", OleDbType.Integer).Value = idIdioma;
+                cmd.Parameters.Add("p11", OleDbType.Integer).Value = idLocal;
+                //
+                cmd.ExecuteNonQuery();
+                con.Close();
+                return 1;
+            }
+            catch (Exception e)
+            {
+                con.Close();
+                MessageBox.Show(e.Message, "Error en l'aplicatiu.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return 0;
+            }
+        }
     }
 }
+

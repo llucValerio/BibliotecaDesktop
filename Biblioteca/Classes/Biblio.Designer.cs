@@ -315,7 +315,7 @@
             titolLabel.AutoSize = true;
             titolLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
             titolLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            titolLabel.Location = new System.Drawing.Point(3, 43);
+            titolLabel.Location = new System.Drawing.Point(3, 41);
             titolLabel.Name = "titolLabel";
             titolLabel.Size = new System.Drawing.Size(83, 19);
             titolLabel.TabIndex = 34;
@@ -327,9 +327,9 @@
             anyLabel.AutoSize = true;
             anyLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
             anyLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            anyLabel.Location = new System.Drawing.Point(3, 62);
+            anyLabel.Location = new System.Drawing.Point(3, 60);
             anyLabel.Name = "anyLabel";
-            anyLabel.Size = new System.Drawing.Size(83, 31);
+            anyLabel.Size = new System.Drawing.Size(83, 30);
             anyLabel.TabIndex = 35;
             anyLabel.Text = "Any (min 01/01/1753):";
             anyLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -339,7 +339,7 @@
             editorLabel.AutoSize = true;
             editorLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
             editorLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            editorLabel.Location = new System.Drawing.Point(3, 105);
+            editorLabel.Location = new System.Drawing.Point(3, 101);
             editorLabel.Name = "editorLabel";
             editorLabel.Size = new System.Drawing.Size(83, 19);
             editorLabel.TabIndex = 36;
@@ -351,7 +351,7 @@
             colleccioLabel.AutoSize = true;
             colleccioLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
             colleccioLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            colleccioLabel.Location = new System.Drawing.Point(3, 136);
+            colleccioLabel.Location = new System.Drawing.Point(3, 131);
             colleccioLabel.Name = "colleccioLabel";
             colleccioLabel.Size = new System.Drawing.Size(83, 19);
             colleccioLabel.TabIndex = 37;
@@ -363,7 +363,7 @@
             numEdicioLabel.AutoSize = true;
             numEdicioLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
             numEdicioLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            numEdicioLabel.Location = new System.Drawing.Point(3, 167);
+            numEdicioLabel.Location = new System.Drawing.Point(3, 161);
             numEdicioLabel.Name = "numEdicioLabel";
             numEdicioLabel.Size = new System.Drawing.Size(83, 19);
             numEdicioLabel.TabIndex = 38;
@@ -375,7 +375,7 @@
             tipusCobertaLabel.AutoSize = true;
             tipusCobertaLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
             tipusCobertaLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            tipusCobertaLabel.Location = new System.Drawing.Point(3, 198);
+            tipusCobertaLabel.Location = new System.Drawing.Point(3, 191);
             tipusCobertaLabel.Name = "tipusCobertaLabel";
             tipusCobertaLabel.Size = new System.Drawing.Size(83, 19);
             tipusCobertaLabel.TabIndex = 39;
@@ -387,7 +387,7 @@
             dataCompraLabel.AutoSize = true;
             dataCompraLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
             dataCompraLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataCompraLabel.Location = new System.Drawing.Point(3, 229);
+            dataCompraLabel.Location = new System.Drawing.Point(3, 221);
             dataCompraLabel.Name = "dataCompraLabel";
             dataCompraLabel.Size = new System.Drawing.Size(83, 19);
             dataCompraLabel.TabIndex = 46;
@@ -399,7 +399,7 @@
             numPaginesLabel.AutoSize = true;
             numPaginesLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
             numPaginesLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            numPaginesLabel.Location = new System.Drawing.Point(3, 260);
+            numPaginesLabel.Location = new System.Drawing.Point(3, 251);
             numPaginesLabel.Name = "numPaginesLabel";
             numPaginesLabel.Size = new System.Drawing.Size(83, 19);
             numPaginesLabel.TabIndex = 47;
@@ -411,7 +411,7 @@
             casaLabel.AutoSize = true;
             casaLabel.Dock = System.Windows.Forms.DockStyle.Top;
             casaLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            casaLabel.Location = new System.Drawing.Point(3, 62);
+            casaLabel.Location = new System.Drawing.Point(3, 60);
             casaLabel.Name = "casaLabel";
             casaLabel.Size = new System.Drawing.Size(84, 19);
             casaLabel.TabIndex = 43;
@@ -423,7 +423,7 @@
             HabitacioLabel.AutoSize = true;
             HabitacioLabel.Dock = System.Windows.Forms.DockStyle.Top;
             HabitacioLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            HabitacioLabel.Location = new System.Drawing.Point(3, 93);
+            HabitacioLabel.Location = new System.Drawing.Point(3, 90);
             HabitacioLabel.Name = "HabitacioLabel";
             HabitacioLabel.Size = new System.Drawing.Size(84, 19);
             HabitacioLabel.TabIndex = 47;
@@ -447,7 +447,7 @@
             comentarisLabel.AutoSize = true;
             comentarisLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             comentarisLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            comentarisLabel.Location = new System.Drawing.Point(3, 217);
+            comentarisLabel.Location = new System.Drawing.Point(3, 211);
             comentarisLabel.Name = "comentarisLabel";
             comentarisLabel.Size = new System.Drawing.Size(84, 94);
             comentarisLabel.TabIndex = 51;
@@ -459,7 +459,7 @@
             idiomaLabel.AutoSize = true;
             idiomaLabel.Dock = System.Windows.Forms.DockStyle.Top;
             idiomaLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            idiomaLabel.Location = new System.Drawing.Point(3, 31);
+            idiomaLabel.Location = new System.Drawing.Point(3, 30);
             idiomaLabel.Name = "idiomaLabel";
             idiomaLabel.Size = new System.Drawing.Size(84, 19);
             idiomaLabel.TabIndex = 55;
@@ -1275,10 +1275,10 @@
             this.tbLlibres.AutoScroll = true;
             this.tbLlibres.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tbLlibres.Controls.Add(this.tlpLlibres1);
-            this.tbLlibres.Location = new System.Drawing.Point(4, 22);
+            this.tbLlibres.Location = new System.Drawing.Point(4, 28);
             this.tbLlibres.Name = "tbLlibres";
             this.tbLlibres.Padding = new System.Windows.Forms.Padding(3);
-            this.tbLlibres.Size = new System.Drawing.Size(776, 386);
+            this.tbLlibres.Size = new System.Drawing.Size(776, 380);
             this.tbLlibres.TabIndex = 0;
             this.tbLlibres.Text = "LLIBRES";
             this.tbLlibres.UseVisualStyleBackColor = true;
@@ -1296,7 +1296,7 @@
             this.tlpLlibres1.RowCount = 2;
             this.tlpLlibres1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 85F));
             this.tlpLlibres1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tlpLlibres1.Size = new System.Drawing.Size(770, 380);
+            this.tlpLlibres1.Size = new System.Drawing.Size(770, 374);
             this.tlpLlibres1.TabIndex = 48;
             // 
             // tlpLlibres3
@@ -1309,7 +1309,7 @@
             this.tlpLlibres3.Controls.Add(this.tlpLlibres5, 0, 0);
             this.tlpLlibres3.Controls.Add(this.tlpLlibres4, 0, 0);
             this.tlpLlibres3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpLlibres3.Location = new System.Drawing.Point(3, 326);
+            this.tlpLlibres3.Location = new System.Drawing.Point(3, 320);
             this.tlpLlibres3.Name = "tlpLlibres3";
             this.tlpLlibres3.RowCount = 1;
             this.tlpLlibres3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -1451,7 +1451,7 @@
             this.tlpLlibres2.Name = "tlpLlibres2";
             this.tlpLlibres2.RowCount = 1;
             this.tlpLlibres2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpLlibres2.Size = new System.Drawing.Size(764, 317);
+            this.tlpLlibres2.Size = new System.Drawing.Size(764, 311);
             this.tlpLlibres2.TabIndex = 49;
             // 
             // llibreDataGridView
@@ -1468,7 +1468,7 @@
             this.llibreDataGridView.MultiSelect = false;
             this.llibreDataGridView.Name = "llibreDataGridView";
             this.llibreDataGridView.ReadOnly = true;
-            this.llibreDataGridView.Size = new System.Drawing.Size(146, 311);
+            this.llibreDataGridView.Size = new System.Drawing.Size(146, 305);
             this.llibreDataGridView.TabIndex = 55;
             this.llibreDataGridView.SelectionChanged += new System.EventHandler(this.LlibreDataGridView_SelectionChanged);
             // 
@@ -1509,13 +1509,13 @@
             this.tlpLlibres8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tlpLlibres8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tlpLlibres8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpLlibres8.Size = new System.Drawing.Size(299, 311);
+            this.tlpLlibres8.Size = new System.Drawing.Size(299, 305);
             this.tlpLlibres8.TabIndex = 53;
             // 
             // titolTextBox
             // 
             this.titolTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.titolTextBox.Location = new System.Drawing.Point(92, 34);
+            this.titolTextBox.Location = new System.Drawing.Point(92, 33);
             this.titolTextBox.Name = "titolTextBox";
             this.titolTextBox.Size = new System.Drawing.Size(204, 27);
             this.titolTextBox.TabIndex = 40;
@@ -1524,7 +1524,7 @@
             // 
             this.anyDateTimePicker.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.anyDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.anyDateTimePicker.Location = new System.Drawing.Point(92, 65);
+            this.anyDateTimePicker.Location = new System.Drawing.Point(92, 63);
             this.anyDateTimePicker.Name = "anyDateTimePicker";
             this.anyDateTimePicker.Size = new System.Drawing.Size(204, 27);
             this.anyDateTimePicker.TabIndex = 41;
@@ -1533,7 +1533,7 @@
             // editorTextBox
             // 
             this.editorTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.editorTextBox.Location = new System.Drawing.Point(92, 96);
+            this.editorTextBox.Location = new System.Drawing.Point(92, 93);
             this.editorTextBox.Name = "editorTextBox";
             this.editorTextBox.Size = new System.Drawing.Size(204, 27);
             this.editorTextBox.TabIndex = 42;
@@ -1541,7 +1541,7 @@
             // colleccioTextBox
             // 
             this.colleccioTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.colleccioTextBox.Location = new System.Drawing.Point(92, 127);
+            this.colleccioTextBox.Location = new System.Drawing.Point(92, 123);
             this.colleccioTextBox.Name = "colleccioTextBox";
             this.colleccioTextBox.Size = new System.Drawing.Size(204, 27);
             this.colleccioTextBox.TabIndex = 43;
@@ -1549,7 +1549,7 @@
             // numEdicioTextBox
             // 
             this.numEdicioTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.numEdicioTextBox.Location = new System.Drawing.Point(92, 158);
+            this.numEdicioTextBox.Location = new System.Drawing.Point(92, 153);
             this.numEdicioTextBox.Name = "numEdicioTextBox";
             this.numEdicioTextBox.Size = new System.Drawing.Size(204, 27);
             this.numEdicioTextBox.TabIndex = 44;
@@ -1558,7 +1558,7 @@
             // tipusCobertaTextBox
             // 
             this.tipusCobertaTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tipusCobertaTextBox.Location = new System.Drawing.Point(92, 189);
+            this.tipusCobertaTextBox.Location = new System.Drawing.Point(92, 183);
             this.tipusCobertaTextBox.Name = "tipusCobertaTextBox";
             this.tipusCobertaTextBox.Size = new System.Drawing.Size(204, 27);
             this.tipusCobertaTextBox.TabIndex = 45;
@@ -1567,7 +1567,7 @@
             // 
             this.dataCompraDateTimePicker.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dataCompraDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dataCompraDateTimePicker.Location = new System.Drawing.Point(92, 220);
+            this.dataCompraDateTimePicker.Location = new System.Drawing.Point(92, 213);
             this.dataCompraDateTimePicker.Name = "dataCompraDateTimePicker";
             this.dataCompraDateTimePicker.Size = new System.Drawing.Size(204, 27);
             this.dataCompraDateTimePicker.TabIndex = 49;
@@ -1576,7 +1576,7 @@
             // numPaginesTextBox
             // 
             this.numPaginesTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.numPaginesTextBox.Location = new System.Drawing.Point(92, 251);
+            this.numPaginesTextBox.Location = new System.Drawing.Point(92, 243);
             this.numPaginesTextBox.Name = "numPaginesTextBox";
             this.numPaginesTextBox.Size = new System.Drawing.Size(204, 27);
             this.numPaginesTextBox.TabIndex = 50;
@@ -1610,7 +1610,7 @@
             this.tlpLlibres7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tlpLlibres7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tlpLlibres7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
-            this.tlpLlibres7.Size = new System.Drawing.Size(301, 311);
+            this.tlpLlibres7.Size = new System.Drawing.Size(301, 305);
             this.tlpLlibres7.TabIndex = 54;
             // 
             // cbAutor
@@ -1626,7 +1626,7 @@
             // 
             this.cbIdiomaLlibres.Dock = System.Windows.Forms.DockStyle.Top;
             this.cbIdiomaLlibres.FormattingEnabled = true;
-            this.cbIdiomaLlibres.Location = new System.Drawing.Point(93, 34);
+            this.cbIdiomaLlibres.Location = new System.Drawing.Point(93, 33);
             this.cbIdiomaLlibres.Name = "cbIdiomaLlibres";
             this.cbIdiomaLlibres.Size = new System.Drawing.Size(205, 27);
             this.cbIdiomaLlibres.TabIndex = 51;
@@ -1635,7 +1635,7 @@
             // 
             this.cbLocalitzacio.Dock = System.Windows.Forms.DockStyle.Top;
             this.cbLocalitzacio.FormattingEnabled = true;
-            this.cbLocalitzacio.Location = new System.Drawing.Point(93, 65);
+            this.cbLocalitzacio.Location = new System.Drawing.Point(93, 63);
             this.cbLocalitzacio.Name = "cbLocalitzacio";
             this.cbLocalitzacio.Size = new System.Drawing.Size(205, 27);
             this.cbLocalitzacio.TabIndex = 44;
@@ -1645,7 +1645,7 @@
             // 
             this.habitacioTextBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.habitacioTextBox.Enabled = false;
-            this.habitacioTextBox.Location = new System.Drawing.Point(93, 96);
+            this.habitacioTextBox.Location = new System.Drawing.Point(93, 93);
             this.habitacioTextBox.Name = "habitacioTextBox";
             this.habitacioTextBox.Size = new System.Drawing.Size(205, 27);
             this.habitacioTextBox.TabIndex = 48;
@@ -1653,7 +1653,7 @@
             // comentarisTextBox
             // 
             this.comentarisTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comentarisTextBox.Location = new System.Drawing.Point(93, 220);
+            this.comentarisTextBox.Location = new System.Drawing.Point(93, 214);
             this.comentarisTextBox.Multiline = true;
             this.comentarisTextBox.Name = "comentarisTextBox";
             this.comentarisTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -1663,11 +1663,11 @@
             // estilLlibreTextBox
             // 
             this.estilLlibreTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.estilLlibreTextBox.Location = new System.Drawing.Point(93, 127);
+            this.estilLlibreTextBox.Location = new System.Drawing.Point(93, 123);
             this.estilLlibreTextBox.Multiline = true;
             this.estilLlibreTextBox.Name = "estilLlibreTextBox";
             this.estilLlibreTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.estilLlibreTextBox.Size = new System.Drawing.Size(205, 87);
+            this.estilLlibreTextBox.Size = new System.Drawing.Size(205, 85);
             this.estilLlibreTextBox.TabIndex = 56;
             this.estilLlibreTextBox.Click += new System.EventHandler(this.EstilLlibreTextBox_Click);
             // 
@@ -1675,9 +1675,9 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(3, 124);
+            this.label1.Location = new System.Drawing.Point(3, 120);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(84, 93);
+            this.label1.Size = new System.Drawing.Size(84, 91);
             this.label1.TabIndex = 57;
             this.label1.Text = "Estils:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1726,7 +1726,7 @@
             // btSortir
             // 
             this.btSortir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btSortir.Location = new System.Drawing.Point(576, 235);
+            this.btSortir.Location = new System.Drawing.Point(576, 229);
             this.btSortir.Name = "btSortir";
             this.btSortir.Size = new System.Drawing.Size(192, 125);
             this.btSortir.TabIndex = 6;
