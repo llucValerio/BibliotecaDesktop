@@ -21,6 +21,7 @@ namespace Biblioteca
     public partial class Biblio : Form
     {
         // PUTA ESPAÑA
+        // PUTA ESPAÑA 2
 
         /*
          * VARIABLES CLASSE
