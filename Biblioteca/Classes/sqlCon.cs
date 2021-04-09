@@ -144,6 +144,7 @@ namespace Biblioteca.Classes
                 OleDbCommand cmd = con.CreateCommand();
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = sqlQuery;
+                //
                 cmd.Parameters.Add("p1", OleDbType.VarChar, 50).Value = titol;
                 cmd.Parameters.Add("p2", OleDbType.DBDate).Value = any;
                 cmd.Parameters.Add("p3", OleDbType.VarChar, 50).Value = editor;
@@ -158,7 +159,7 @@ namespace Biblioteca.Classes
                 //
                 cmd.ExecuteNonQuery();
                 //
-                cmd.CommandText = "SELECT @@IDENTITY FROM AUTORS";
+                cmd.CommandText = "SELECT @@IDENTITY FROM LLIBRE";
                 int idLlibre = (Int32)cmd.ExecuteScalar();
                 con.Close();
                 return idLlibre;

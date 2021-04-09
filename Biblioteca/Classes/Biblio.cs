@@ -20,12 +20,10 @@ namespace Biblioteca
 {
     public partial class Biblio : Form
     {
-        // PUTA ESPAÑA
-        // PUTA ESPAÑA 2
-
         /*
          * VARIABLES CLASSE
          */
+        public DataTable DtBusquedaLlibre = new DataTable();
         public DataTable DtLlibre = new DataTable();
         public DataTable DtAutor = new DataTable();
         public DataTable DtIdioma = new DataTable();
@@ -65,7 +63,7 @@ namespace Biblioteca
         //
         public SqlCon bbddConn = new SqlCon();
         /*
-         * EVENTSÇ
+         * EVENTS
          */
         public Biblio()
         {
@@ -477,7 +475,7 @@ namespace Biblioteca
                     // Mirem si s'ha seleccionat alguna localitzacio
                     foreach (DataRow filaLocalitzacio in DtLocalitzacio.Rows)
                     {
-                        if (cbLocalitzacio.SelectedItem == filaLocalitzacio["Casa"])
+                        if ((Int32)cbLocalitzacio.SelectedValue == (Int32)filaLocalitzacio["IdLocalitzacio"])
                         {
                             idLocal = (Int32)filaLocalitzacio["IdLocalitzacio"];
                         }
@@ -493,7 +491,7 @@ namespace Biblioteca
                     if (afegirLlibre) // GUARDAR LLIBRE
                     {
                         // Insertem el llibre a la BBDD
-                        string sqlQuery = "INSERT INTO LLIBRE (Titol, Any, Editor, Colleccio, NumEdicio, TipusCoberta, DataCompra, NumPagines, Comentaris, IdIdioma, IdLocalitzacio) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                        string sqlQuery = "INSERT INTO LLIBRE (Titol, [Any], Editor, Colleccio, NumEdicio, TipusCoberta, [DataCompra], NumPagines, Comentaris, IdIdioma, IdLocalitzacio) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
                         int idLlibre = bbddConn.InsertLlibre(sqlQuery, titol, anyDateTimePicker.Value, editor, col, edi, cob, dataCompraDateTimePicker.Value, numPag, coment, idIdioma, idLocal);
                         // Insertem els estils i l'autor
                         if (idLlibre != 0)
@@ -503,6 +501,7 @@ namespace Biblioteca
                             int resultat = bbddConn.InsUpdDel(sqlQuery);
                             if (resultat == 1)
                             {
+                                // Insertem estils si n'hi ha
                                 if (estilLlibreTextBox.Text.Length != 0)
                                 {
                                     bool resultatProv = false;
@@ -553,59 +552,77 @@ namespace Biblioteca
                     {
                         if (llibreDataGridView.CurrentRow != null)
                         {
-                            //Recuperem el ID del llibre seleccionat
+                            // Recuperem el ID del llibre seleccionat
                             DataGridViewRow filaLlibre = this.llibreDataGridView.Rows[llibreDataGridView.CurrentRow.Index];
                             int idLlibre= (Int32)filaLlibre.Cells[0].Value;
-                            //
-                            string sqlQuery = "UPDATE LLIBRE SET Titol=?, Any=?, Editor=?, Colleccio=?, NumEdicio=?, TipusCoberta=?, DataCompra=?, NumPagines=?, Comentaris=?, IdIdioma=?, IdLocalitzacio=? WHERE IdLlibre=" + idLlibre;
+                            // Actualitzem el llibre amb els camps de text
+                            string sqlQuery = "UPDATE LLIBRE SET Titol=?, [Any]=?, Editor=?, Colleccio=?, NumEdicio=?, TipusCoberta=?, [DataCompra]=?, NumPagines=?, Comentaris=?, IdIdioma=?, IdLocalitzacio=? WHERE IdLlibre=" + idLlibre;
                             int resultat = bbddConn.UpdateLlibre(sqlQuery, titol, anyDateTimePicker.Value, editor, col, edi, cob, dataCompraDateTimePicker.Value, numPag, coment, idIdioma, idLocal);
                             //
                             if (resultat == 1)
                             {
+                                // Eliminem els estils que tenia el llibre
                                 resultat = bbddConn.InsUpdDel("DELETE FROM ESTIL_LLIBRE WHERE IdLlibre=" + idLlibre);
-                                if (resultat == 1)
+                                int resultat2 = bbddConn.InsUpdDel("DELETE FROM AUTOR_LLIBRE WHERE IdLlibre=" + idLlibre);
+                                if (resultat == 1 && resultat2 == 1)
                                 {
-
-
-
-                                    if (estilAutorsTextBox.Text.Length != 0)
+                                    // Insertem l'autor
+                                    sqlQuery = "INSERT INTO AUTOR_LLIBRE (IdAutor, IdLlibre) VALUES (" + idAutor + ", " + idLlibre + ")";
+                                    resultat = bbddConn.InsUpdDel(sqlQuery);
+                                    if (resultat == 1)
                                     {
-                                        bool resultatProv = false;
-                                        foreach (string estil in EstilsAutorSelec)
+                                        // Insertem estils si n'hi ha
+                                        if (estilLlibreTextBox.Text.Length != 0)
                                         {
-                                            int idEstil = bbddConn.GetIdEstil(estil);
-                                            resultat = bbddConn.InsUpdDel("INSERT INTO ESTIL_AUTOR (IdEstil, IdAutor) VALUES (" + idEstil + ", " + idAutor + ")");
-                                            if (resultat == 1)
+                                            bool resultatProv = false;
+                                            foreach (string estil in EstilsLlibreSelec)
                                             {
-                                                resultatProv = true;
+                                                foreach (DataRow filaEstil in DtEstil.Rows)
+                                                {
+                                                    if (filaEstil["Estil"].ToString() == estil)
+                                                    {
+                                                        int idEstil = (Int32)filaEstil["IdEstil"];
+                                                        resultat = bbddConn.InsUpdDel("INSERT INTO ESTIL_LLIBRE (IdEstil, IdLlibre) VALUES (" + idEstil + ", " + idLlibre + ")");
+                                                        if (resultat == 1)
+                                                        {
+                                                            resultatProv = true;
+                                                        }
+                                                        else
+                                                        {
+                                                            resultatProv = false;
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                            if (resultatProv)
+                                            {
+                                                MessageBox.Show("Llibre, autor i estils afegits correctament.", "Insertar Llibre", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                             }
                                             else
                                             {
-                                                resultatProv = false;
+                                                MessageBox.Show("Hi ha hagut un problema insertant els estils del llibre.", "Insertar Llibre", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                             }
-                                        }
-                                        if (resultatProv)
-                                        {
-                                            MessageBox.Show("Autor i estils modificats correctament.", "Modificar Autor", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                         }
                                         else
                                         {
-                                            MessageBox.Show("Hi ha hagut un problema al registrar els estils de l'autor.", "Modificar Autor", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                            MessageBox.Show("Llibre i autor afegits correctament.", "Insertar Llibre", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                         }
                                     }
                                     else
                                     {
-                                        MessageBox.Show("Autor modificat correctament.", "Modificar Autor", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        MessageBox.Show("Hi ha hagut un problema insertant l'autor del llibre.", "Insertar Llibre", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     }
-
-
-
-
-
                                 }
                                 else
                                 {
-                                    MessageBox.Show("Hi ha hagut un problema al registrar els estils del llibre.", "Modificar Llibre", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    if (resultat != 1)
+                                    {
+                                        MessageBox.Show("Hi ha hagut un problema al registrar els estils del llibre.", "Modificar Llibre", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Hi ha hagut un problema al registrar l'autor del llibre.", "Modificar Llibre", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    }
                                 }
                             }
                             else
@@ -620,83 +637,40 @@ namespace Biblioteca
                     MessageBox.Show("Fa falta com a mínim el títol del llibre.", "Introduïr / modificar Llibre.", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
-            //***************************************************************************************************************************************************
-                        
-                        
-                        
-                            
-                            
-                               
-                                    
-                            
-                            
-                        
-
-
-
- 
             //Habiltem / Deshabilitem camps.
-            this.tlpAutors7.Enabled = false;
+            this.tlpLlibres7.Enabled = false;
+            this.tlpLlibres8.Enabled = false;
             //
-            btAfegirAutors.Visible = true;
-            btModificarAutors.Visible = true;
-            btEliminarAutors.Visible = true;
-            btTornarAutors.Visible = true;
+            btAfegirLlibres.Visible = true;
+            btModificarLlibres.Visible = true;
+            btEliminarLlibres.Visible = true;
+            btTornarLlibres.Visible = true;
             //
-            btCancelarAutors.Visible = false;
-            btGuardarAutors.Visible = false;
+            btCancelarLlibres.Visible = false;
+            btGuardarLlibres.Visible = false;
             //
-            autorsDataGridView.Enabled = true;
+            llibreDataGridView.Enabled = true;
             // Netegem camps
-            nomTextBox.Clear();
-            cognomsTextBox.Clear();
-            nacionalitatTextBox.Clear();
-            dataNaixementDateTimePicker.Value = DateTime.Today;
-            estilAutorsTextBox.Clear();
-            comentarisTextBox1.Clear();
+            titolTextBox.Clear();
+            anyDateTimePicker.Value = DateTime.Today;
+            editorTextBox.Clear();
+            colleccioTextBox.Clear();
+            numEdicioTextBox.Clear();
+            tipusCobertaTextBox.Clear();
+            dataCompraDateTimePicker.Value = DateTime.Today;
+            numPaginesTextBox.Clear();
+            habitacioTextBox.Clear();
+            estilLlibreTextBox.Clear();
+            comentarisTextBox.Clear();
             //
-            afegirAutor = false;
-            ActualGridLlibre();
             CarregarCombos();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            cbAutor.SelectedIndex = cbAutor.FindStringExact("");
+            cbIdiomaLlibres.SelectedIndex = cbAutor.FindStringExact("");
+            cbLocalitzacio.SelectedIndex = cbLocalitzacio.FindStringExact("");
+            // Actualitzem el grid d'estils
+            ActualGridLlibre();
+            //
+            afegirLlibre = false;
         }
         private void BtCancelarLlibres_Click(object sender, EventArgs e)
         {
@@ -1868,18 +1842,26 @@ namespace Biblioteca
          */
         private void BuscarLlibre()
         {
-            /*
-            loaded = false;
             DialogResult dr = new DialogResult();
             BuscarLlibre formBusqueda = new BuscarLlibre();
             dr = formBusqueda.ShowDialog();
             if (dr == DialogResult.OK)
             {
-                cadenaBusqueda = "%" + formBusqueda.textBusqueda + "%";   
-                this.tbPrincipal.SelectedTab = tbLlibres;
-                this.llibreTableAdapter.FillByBuscarLlibreCombo(this.biblioDataSet.LLIBRE, cadenaBusqueda);
-                this.autorLibreTableAdapter.Fill(this.biblioDataSet.AUTOR_LLIBRE);
-                loaded = true;
+                string sqlQuery = "SELECT * FROM LLIBRE WHERE TitoL LIKE % " + formBusqueda.textBusqueda + " %";
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
+                
                 RefrescCampsLlibres();
             }
             else if (dr == DialogResult.Cancel)
@@ -1891,7 +1873,6 @@ namespace Biblioteca
             {
                 formBusqueda.Close();   
             }
-            */
         }
         private void RefrescCampsLlibres()
         {

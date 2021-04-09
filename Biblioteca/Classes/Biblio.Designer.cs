@@ -259,7 +259,7 @@
             // 
             nomLabel.AutoSize = true;
             nomLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            nomLabel.Location = new System.Drawing.Point(3, 11);
+            nomLabel.Location = new System.Drawing.Point(3, 12);
             nomLabel.Name = "nomLabel";
             nomLabel.Size = new System.Drawing.Size(106, 19);
             nomLabel.TabIndex = 2;
@@ -270,7 +270,7 @@
             // 
             cognomsLabel.AutoSize = true;
             cognomsLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            cognomsLabel.Location = new System.Drawing.Point(3, 41);
+            cognomsLabel.Location = new System.Drawing.Point(3, 43);
             cognomsLabel.Name = "cognomsLabel";
             cognomsLabel.Size = new System.Drawing.Size(106, 19);
             cognomsLabel.TabIndex = 4;
@@ -281,7 +281,7 @@
             // 
             nacionalitatLabel.AutoSize = true;
             nacionalitatLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            nacionalitatLabel.Location = new System.Drawing.Point(3, 71);
+            nacionalitatLabel.Location = new System.Drawing.Point(3, 74);
             nacionalitatLabel.Name = "nacionalitatLabel";
             nacionalitatLabel.Size = new System.Drawing.Size(106, 19);
             nacionalitatLabel.TabIndex = 6;
@@ -292,7 +292,7 @@
             // 
             dataNaixementLabel.AutoSize = true;
             dataNaixementLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            dataNaixementLabel.Location = new System.Drawing.Point(3, 101);
+            dataNaixementLabel.Location = new System.Drawing.Point(3, 105);
             dataNaixementLabel.Name = "dataNaixementLabel";
             dataNaixementLabel.Size = new System.Drawing.Size(106, 19);
             dataNaixementLabel.TabIndex = 8;
@@ -303,7 +303,7 @@
             // 
             comentarisLabel1.AutoSize = true;
             comentarisLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            comentarisLabel1.Location = new System.Drawing.Point(3, 211);
+            comentarisLabel1.Location = new System.Drawing.Point(3, 217);
             comentarisLabel1.Name = "comentarisLabel1";
             comentarisLabel1.Size = new System.Drawing.Size(106, 94);
             comentarisLabel1.TabIndex = 10;
@@ -975,10 +975,10 @@
             // 
             this.tbAutors.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tbAutors.Controls.Add(this.tlpAutors1);
-            this.tbAutors.Location = new System.Drawing.Point(4, 28);
+            this.tbAutors.Location = new System.Drawing.Point(4, 22);
             this.tbAutors.Name = "tbAutors";
             this.tbAutors.Padding = new System.Windows.Forms.Padding(3);
-            this.tbAutors.Size = new System.Drawing.Size(776, 380);
+            this.tbAutors.Size = new System.Drawing.Size(776, 386);
             this.tbAutors.TabIndex = 1;
             this.tbAutors.Text = "AUTORS";
             this.tbAutors.UseVisualStyleBackColor = true;
@@ -996,7 +996,7 @@
             this.tlpAutors1.RowCount = 2;
             this.tlpAutors1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 85F));
             this.tlpAutors1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tlpAutors1.Size = new System.Drawing.Size(770, 374);
+            this.tlpAutors1.Size = new System.Drawing.Size(770, 380);
             this.tlpAutors1.TabIndex = 0;
             // 
             // tlpAutors3
@@ -1009,7 +1009,7 @@
             this.tlpAutors3.Controls.Add(this.tlpAutors5, 0, 0);
             this.tlpAutors3.Controls.Add(this.tlpAutors4, 0, 0);
             this.tlpAutors3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpAutors3.Location = new System.Drawing.Point(3, 320);
+            this.tlpAutors3.Location = new System.Drawing.Point(3, 326);
             this.tlpAutors3.Name = "tlpAutors3";
             this.tlpAutors3.RowCount = 1;
             this.tlpAutors3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -1151,7 +1151,7 @@
             this.tlpAutors2.RowCount = 1;
             this.tlpAutors2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpAutors2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpAutors2.Size = new System.Drawing.Size(764, 311);
+            this.tlpAutors2.Size = new System.Drawing.Size(764, 317);
             this.tlpAutors2.TabIndex = 1;
             // 
             // autorsDataGridView
@@ -1167,7 +1167,7 @@
             this.autorsDataGridView.Location = new System.Drawing.Point(3, 3);
             this.autorsDataGridView.Name = "autorsDataGridView";
             this.autorsDataGridView.ReadOnly = true;
-            this.autorsDataGridView.Size = new System.Drawing.Size(376, 305);
+            this.autorsDataGridView.Size = new System.Drawing.Size(376, 311);
             this.autorsDataGridView.TabIndex = 5;
             this.autorsDataGridView.SelectionChanged += new System.EventHandler(this.AutorsDataGridView_SelectionChanged);
             // 
@@ -1200,7 +1200,7 @@
             this.tlpAutors7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tlpAutors7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tlpAutors7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpAutors7.Size = new System.Drawing.Size(376, 305);
+            this.tlpAutors7.Size = new System.Drawing.Size(376, 311);
             this.tlpAutors7.TabIndex = 4;
             // 
             // nomTextBox
@@ -1214,7 +1214,7 @@
             // cognomsTextBox
             // 
             this.cognomsTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.cognomsTextBox.Location = new System.Drawing.Point(115, 33);
+            this.cognomsTextBox.Location = new System.Drawing.Point(115, 34);
             this.cognomsTextBox.Name = "cognomsTextBox";
             this.cognomsTextBox.Size = new System.Drawing.Size(258, 27);
             this.cognomsTextBox.TabIndex = 5;
@@ -1222,7 +1222,7 @@
             // nacionalitatTextBox
             // 
             this.nacionalitatTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.nacionalitatTextBox.Location = new System.Drawing.Point(115, 63);
+            this.nacionalitatTextBox.Location = new System.Drawing.Point(115, 65);
             this.nacionalitatTextBox.Name = "nacionalitatTextBox";
             this.nacionalitatTextBox.Size = new System.Drawing.Size(258, 27);
             this.nacionalitatTextBox.TabIndex = 7;
@@ -1231,7 +1231,7 @@
             // 
             this.dataNaixementDateTimePicker.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dataNaixementDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dataNaixementDateTimePicker.Location = new System.Drawing.Point(115, 93);
+            this.dataNaixementDateTimePicker.Location = new System.Drawing.Point(115, 96);
             this.dataNaixementDateTimePicker.Name = "dataNaixementDateTimePicker";
             this.dataNaixementDateTimePicker.Size = new System.Drawing.Size(258, 27);
             this.dataNaixementDateTimePicker.TabIndex = 9;
@@ -1240,7 +1240,7 @@
             // comentarisTextBox1
             // 
             this.comentarisTextBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comentarisTextBox1.Location = new System.Drawing.Point(115, 214);
+            this.comentarisTextBox1.Location = new System.Drawing.Point(115, 220);
             this.comentarisTextBox1.MaxLength = 50;
             this.comentarisTextBox1.Multiline = true;
             this.comentarisTextBox1.Name = "comentarisTextBox1";
@@ -1252,9 +1252,9 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(3, 120);
+            this.label2.Location = new System.Drawing.Point(3, 124);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(106, 91);
+            this.label2.Size = new System.Drawing.Size(106, 93);
             this.label2.TabIndex = 12;
             this.label2.Text = "Estils:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1262,11 +1262,11 @@
             // estilAutorsTextBox
             // 
             this.estilAutorsTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.estilAutorsTextBox.Location = new System.Drawing.Point(115, 123);
+            this.estilAutorsTextBox.Location = new System.Drawing.Point(115, 127);
             this.estilAutorsTextBox.Multiline = true;
             this.estilAutorsTextBox.Name = "estilAutorsTextBox";
             this.estilAutorsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.estilAutorsTextBox.Size = new System.Drawing.Size(258, 85);
+            this.estilAutorsTextBox.Size = new System.Drawing.Size(258, 87);
             this.estilAutorsTextBox.TabIndex = 13;
             this.estilAutorsTextBox.Click += new System.EventHandler(this.estilAutorsTextBox_Click);
             // 
@@ -1528,7 +1528,7 @@
             this.anyDateTimePicker.Name = "anyDateTimePicker";
             this.anyDateTimePicker.Size = new System.Drawing.Size(204, 27);
             this.anyDateTimePicker.TabIndex = 41;
-            this.anyDateTimePicker.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.anyDateTimePicker.Value = new System.DateTime(1753, 1, 1, 0, 0, 0, 0);
             // 
             // editorTextBox
             // 
@@ -1616,7 +1616,9 @@
             // cbAutor
             // 
             this.cbAutor.Dock = System.Windows.Forms.DockStyle.Top;
+            this.cbAutor.DropDownHeight = 400;
             this.cbAutor.FormattingEnabled = true;
+            this.cbAutor.IntegralHeight = false;
             this.cbAutor.Location = new System.Drawing.Point(93, 3);
             this.cbAutor.Name = "cbAutor";
             this.cbAutor.Size = new System.Drawing.Size(205, 27);
@@ -1625,7 +1627,9 @@
             // cbIdiomaLlibres
             // 
             this.cbIdiomaLlibres.Dock = System.Windows.Forms.DockStyle.Top;
+            this.cbIdiomaLlibres.DropDownHeight = 400;
             this.cbIdiomaLlibres.FormattingEnabled = true;
+            this.cbIdiomaLlibres.IntegralHeight = false;
             this.cbIdiomaLlibres.Location = new System.Drawing.Point(93, 33);
             this.cbIdiomaLlibres.Name = "cbIdiomaLlibres";
             this.cbIdiomaLlibres.Size = new System.Drawing.Size(205, 27);
@@ -1634,7 +1638,9 @@
             // cbLocalitzacio
             // 
             this.cbLocalitzacio.Dock = System.Windows.Forms.DockStyle.Top;
+            this.cbLocalitzacio.DropDownHeight = 400;
             this.cbLocalitzacio.FormattingEnabled = true;
+            this.cbLocalitzacio.IntegralHeight = false;
             this.cbLocalitzacio.Location = new System.Drawing.Point(93, 63);
             this.cbLocalitzacio.Name = "cbLocalitzacio";
             this.cbLocalitzacio.Size = new System.Drawing.Size(205, 27);
@@ -1726,7 +1732,7 @@
             // btSortir
             // 
             this.btSortir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btSortir.Location = new System.Drawing.Point(576, 229);
+            this.btSortir.Location = new System.Drawing.Point(576, 193);
             this.btSortir.Name = "btSortir";
             this.btSortir.Size = new System.Drawing.Size(192, 125);
             this.btSortir.TabIndex = 6;
