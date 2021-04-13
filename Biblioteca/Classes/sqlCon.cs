@@ -7,11 +7,18 @@ using System.Data.OleDb;
 using System.Data;
 using System.Windows.Forms;
 using System.Linq.Expressions;
+using System.Security.Policy;
 
 namespace Biblioteca.Classes
 {    
     public class SqlCon
     {
+        /*
+         * IdAutor Desconegut <-- 83
+         * IdLocalitzacio <-- 54
+         * IdIdioma <-- 10
+         */
+        
         /*
          * VARIABLES CLASSE
          */
@@ -28,10 +35,10 @@ namespace Biblioteca.Classes
                 OleDbCommand cmd = con.CreateCommand();
                 cmd.CommandType = CommandType.Text;
                 cmd.CommandText = sqlQuery;
-                cmd.ExecuteNonQuery();
+                int numRowsAffect = 0;
+                numRowsAffect = cmd.ExecuteNonQuery();
                 OleDbDataAdapter da = new OleDbDataAdapter(cmd);
                 da.Fill(dt);
-                //dataGrid.DataSource = dt;
                 con.Close();
                 return true;
             }
@@ -83,6 +90,69 @@ namespace Biblioteca.Classes
                 return 0;
             }
         }
+        // RETORNA UN INT DEL PRIMER REGISTRE DE LA BUSQUEDA
+        public int GetTotal(string sqlQuery)
+        {
+            int total = 0;
+            try
+            {
+                con.Open();
+                OleDbCommand cmd = con.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sqlQuery;
+                total = (Int32)cmd.ExecuteScalar();
+                con.Close();
+                return total;
+            }
+            catch (Exception e)
+            {
+                con.Close();
+                MessageBox.Show(e.Message, "Error en l'aplicatiu.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return total;
+            }
+        }
+        // RETORNA UN STRING DEL PRIMER REGISTRE DE LA BUSQUEDA
+        public string GetNom(string sqlQuery)
+        {
+            string nom = "error";
+            try
+            {
+                con.Open();
+                OleDbCommand cmd = con.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sqlQuery;
+                nom = cmd.ExecuteScalar().ToString();
+                con.Close();
+                return nom;
+            }
+            catch (Exception e)
+            {
+                con.Close();
+                MessageBox.Show(e.Message, "Error en l'aplicatiu.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return nom;
+            }
+        }
+        // RETORNA UN INT AMB EL NUMERO DE FILES AFECTADES
+        public int GetFiles(string sqlQuery)
+        {
+            int total = 0;
+            try
+            {
+                con.Open();
+                OleDbCommand cmd = con.CreateCommand();
+                cmd.CommandType = CommandType.Text;
+                cmd.CommandText = sqlQuery;
+                total = (Int32)cmd.ExecuteScalar();
+                con.Close();
+                return total;
+            }
+            catch (Exception e)
+            {
+                con.Close();
+                MessageBox.Show(e.Message, "Error en l'aplicatiu.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return total;
+            }
+        }
         /*
          * INSERT / UPDATE / DELETE
          */
@@ -119,7 +189,7 @@ namespace Biblioteca.Classes
                 cmd.Parameters.Add("p2", OleDbType.VarChar, 50).Value = cognoms;
                 cmd.Parameters.Add("p3", OleDbType.VarChar, 50).Value = nacionalitat;
                 cmd.Parameters.Add("p4", OleDbType.DBDate).Value = data;
-                cmd.Parameters.Add("p5", OleDbType.VarChar, 50).Value = comentaris;
+                cmd.Parameters.Add("p5", OleDbType.VarChar, 65535).Value = comentaris;
                 //
                 cmd.ExecuteNonQuery();
                 //
@@ -153,7 +223,7 @@ namespace Biblioteca.Classes
                 cmd.Parameters.Add("p6", OleDbType.VarChar, 50).Value = tipusCoberta;
                 cmd.Parameters.Add("p7", OleDbType.DBDate).Value = dataCompra;
                 cmd.Parameters.Add("p8", OleDbType.Integer).Value = numPag;
-                cmd.Parameters.Add("p9", OleDbType.VarChar, 50).Value = comentaris;
+                cmd.Parameters.Add("p9", OleDbType.VarChar, 65535).Value = comentaris;
                 cmd.Parameters.Add("p10", OleDbType.Integer).Value = idIdioma;
                 cmd.Parameters.Add("p11", OleDbType.Integer).Value = idLocal;
                 //

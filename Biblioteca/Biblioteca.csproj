@@ -137,9 +137,17 @@
     <None Include="Resources\BarnaStaPauFons.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\afegir.png" />
     <Content Include="Resources\Biblioteca2020.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Resources\buscar.png" />
+    <Content Include="Resources\cancelar.png" />
+    <Content Include="Resources\eliminar.png" />
+    <Content Include="Resources\guardar.png" />
+    <Content Include="Resources\modificar.png" />
+    <Content Include="Resources\sortir.png" />
+    <Content Include="Resources\tornar.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

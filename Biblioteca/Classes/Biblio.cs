@@ -47,6 +47,9 @@ namespace Biblioteca
         public bool afegirUbicacio = false;
         public bool afegirEstil = false;
         //
+        public bool editantLlibre = false;
+        public bool editantAutor = false;
+        //
         public string tipusFont="";
         public string stringSql = "";
         //
@@ -80,6 +83,7 @@ namespace Biblioteca
             // *********************** LLIBRES            
             stringSql = "SELECT * FROM LLIBRE ORDER BY Titol";
             bbddConn.GetData(stringSql, ref DtLlibre);
+            lbLlibresTotalsBiblio.Text = DtLlibre.Rows.Count.ToString();
             // *********************** AUTORS
             stringSql = "SELECT IdAutor, Nom, Cognoms, Nacionalitat, DataNaixement, Comentaris, Nom &' ' & Cognoms AS NomComplet FROM AUTORS ORDER BY Cognoms";
             bbddConn.GetData(stringSql, ref DtAutor);
@@ -134,7 +138,7 @@ namespace Biblioteca
         }
         private void TbPrincipal_SelectedIndexChanged(object sender, EventArgs e)
         {
-            this.dtLlibresAct = false;
+            //this.dtLlibresAct = false;
             this.dtAutorsAct = false;
             this.dtIdiomesAct = false;
             this.dtUbicacionsAct = false;
@@ -144,6 +148,7 @@ namespace Biblioteca
             switch (tbPrincipal.SelectedIndex)
             {
                 case 1: // *********************** LLIBRES
+                    /*
                     // Carreguem el DataTable al Grid
                     llibreDataGridView.DataSource = DtLlibre;
                     dtLlibresAct = true;
@@ -158,7 +163,8 @@ namespace Biblioteca
                     this.llibreDataGridView.Columns["Comentaris"].Visible = false;
                     this.llibreDataGridView.Columns["IdLlibre"].Visible = false;
                     this.llibreDataGridView.Columns["IdIdioma"].Visible = false;
-                    this.llibreDataGridView.Columns["IdLocalitzacio"].Visible = false;
+                    this.llibreDataGridView.Columns["IdLocalitzacio"].Visible = false;                    
+                    */
                     // Sortim del 'case'
                     break;
                 case 2: // *********************** AUTORS
@@ -199,6 +205,146 @@ namespace Biblioteca
                     // Sortim del 'case'
                     break;
                 case 6: // *********************** LLISTATS
+                    // Totals
+                    lbTotLlibres.Text = DtLlibre.Rows.Count.ToString();
+                    lbTotAutors.Text = DtAutor.Rows.Count.ToString();
+                    lbTotIdioma.Text = DtIdioma.Rows.Count.ToString();
+                    lbTotUbic.Text = DtLocalitzacio.Rows.Count.ToString();
+                    lbTotEstil.Text = DtEstil.Rows.Count.ToString();
+                    // Autor
+                    string sqlQuery = "SELECT IdAutor, COUNT (IdAutor) AS total FROM AUTOR_LLIBRE GROUP BY IdAutor ORDER BY 2 DESC";
+                    int idAutor = bbddConn.GetTotal(sqlQuery);
+                    if (idAutor == 0)
+                    {
+                        MessageBox.Show("Hi ha hagut un problema recuperant la informació.", "Dades Biblioteca.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        sqlQuery = "SELECT Nom & ' ' & Cognoms AS NomComplet FROM AUTORS WHERE IdAutor = " + idAutor;
+                        string autor = bbddConn.GetNom(sqlQuery);
+                        lbMesUtilAutor.Text = autor;
+                    }
+                    int NoUtilAutors = 0;
+                    foreach (DataRow filaAutor in DtAutor.Rows)
+                    {
+                        bool existeix = false;
+                        foreach (DataRow filaAutorLlibre in DtAutorLlibre.Rows)
+                        {
+                            if ((Int32)filaAutor["IdAutor"] == (Int32)filaAutorLlibre["IdAutor"])
+                            {
+                                existeix = true;
+                            }
+                        }
+                        if (existeix == false)
+                        {
+                            NoUtilAutors++;
+                        }
+                        /*sqlQuery = "SELECT COUNT (*) FROM AUTOR_LLIBRE WHERE IdAutor = " + (Int32)filaAutor["IdAutor"];
+                        int files = bbddConn.GetFiles(sqlQuery);
+                        if (files == 0)
+                        {
+                            NoUtilAutors++;
+                        }*/
+                    }
+                    lbNoUtilAutor.Text = NoUtilAutors.ToString();
+                    // Idioma
+                    sqlQuery = "SELECT IdIdioma, COUNT (IdIdioma) AS total FROM LLIBRE GROUP BY IdIdioma ORDER BY 2 DESC";
+                    int idIdioma = bbddConn.GetTotal(sqlQuery);
+                    if (idIdioma == 0)
+                    {
+                        MessageBox.Show("Hi ha hagut un problema recuperant la informació.", "Dades Biblioteca.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        sqlQuery = "SELECT Idioma FROM IDIOMA WHERE IdIdioma = " + idIdioma;
+                        string idioma = bbddConn.GetNom(sqlQuery);
+                        lbMesUtilIdioma.Text = idioma;
+                    }
+                    int NoUtilIdiomes = 0;
+                    foreach (DataRow filaIdioma in DtIdioma.Rows)
+                    {
+                        bool existeix = false;
+                        foreach (DataRow filaLlibre in DtLlibre.Rows)
+                        {
+                            if ((Int32)filaIdioma["IdIdioma"] == (Int32)filaLlibre["IdIdioma"])
+                            {
+                                existeix = true;
+                            }
+                       }
+                        if (existeix == false)
+                        {
+                            NoUtilIdiomes++;
+                        }
+                    }
+                    lbNoUtilIdioma.Text = NoUtilIdiomes.ToString();
+                    // Ubicacions
+                    sqlQuery = "SELECT IdLocalitzacio, COUNT (IdLocalitzacio) AS total FROM LLIBRE GROUP BY IdLocalitzacio ORDER BY 2 DESC";
+                    int IdLocalitzacio = bbddConn.GetTotal(sqlQuery);
+                    if (idIdioma == 0)
+                    {
+                        MessageBox.Show("Hi ha hagut un problema recuperant la informació.", "Dades Biblioteca.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        sqlQuery = "SELECT Casa & ' ' & Habitacio AS Ubicacio FROM LOCALITZACIO WHERE IdLocalitzacio = " + IdLocalitzacio;
+                        string local = bbddConn.GetNom(sqlQuery);
+                        lbMesUtilUbic.Text = local;
+                    }
+                    int NoUtilLocal = 0;
+                    foreach (DataRow filaLocal in DtLocalitzacio.Rows)
+                    {
+                        bool existeix = false;
+                        foreach (DataRow filaLlibre in DtLlibre.Rows)
+                        {
+                            if ((Int32)filaLocal["IdLocalitzacio"] == (Int32)filaLlibre["IdLocalitzacio"])
+                            {
+                                existeix = true;
+                            }
+                        }
+                        if (existeix == false)
+                        {
+                            NoUtilLocal++;
+                        }
+                    }
+                    lbNoUtilUbic.Text = NoUtilLocal.ToString();
+                    // Estils
+                    
+                    sqlQuery = "SELECT IdEstil, SUM(total) AS suma FROM (SELECT A.IdEstil, COUNT(A.IdEstil) AS total FROM ESTIL_AUTOR A GROUP BY A.IdEstil ORDER BY 2 DESC UNION ALL SELECT L.IdEstil, COUNT(L.IdEstil) AS total FROM ESTIL_LLIBRE L GROUP BY L.IdEstil ORDER BY 2 DESC) GROUP BY IdEstil ORDER BY 2 DESC";
+                    int IdEstil = bbddConn.GetTotal(sqlQuery);
+                    if (IdEstil == 0)
+                    {
+                        MessageBox.Show("Hi ha hagut un problema recuperant la informació.", "Dades Biblioteca.", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        sqlQuery = "SELECT Estil FROM ESTIL WHERE IdEstil = " + IdEstil;
+                        string estil = bbddConn.GetNom(sqlQuery);
+                        lbMesUtilEstil.Text = estil;
+                    }
+                    int NoUtilEstils = 0;
+                    foreach (DataRow filaEstil in DtEstil.Rows)
+                    {
+                        bool existeix = false;
+                        foreach (DataRow filaEstilLlibre in DtEstilLlibre.Rows)
+                        {
+                            if ((Int32)filaEstil["IdEstil"] == (Int32)filaEstilLlibre["IdEstil"])
+                            {
+                                existeix = true;
+                            }
+                        }
+                        foreach (DataRow filaEstilAutor in DtEstilAutor.Rows)
+                        {
+                            if ((Int32)filaEstil["IdEstil"] == (Int32)filaEstilAutor["IdEstil"])
+                            {
+                                existeix = true;
+                            }
+                        }
+                        if (existeix == false)
+                        {
+                            NoUtilEstils++;
+                        }
+                    }
+                    lbNoUtilEstil.Text = NoUtilEstils.ToString();
                     break;
                 default:
                     break;
@@ -242,7 +388,44 @@ namespace Biblioteca
          */
         private void BtBuscar_Click(object sender, EventArgs e)
         {
-            BuscarLlibre();
+            //Bloquegem el refresc del grid
+            dtLlibresAct = false;
+            //
+            DialogResult dr = new DialogResult();
+            BuscarLlibre formBusqueda = new BuscarLlibre();
+            dr = formBusqueda.ShowDialog();
+            if (dr == DialogResult.OK)
+            {
+                DtBusquedaLlibre.Clear();
+                stringSql = "SELECT * FROM LLIBRE WHERE Titol LIKE '%" + formBusqueda.textBusqueda + "%' ORDER BY Titol;";
+                bbddConn.GetData(stringSql, ref DtBusquedaLlibre);
+                llibreDataGridView.DataSource = DtBusquedaLlibre;
+                //
+                // Ocultem les columnes del grid que no ens interessen
+                this.llibreDataGridView.Columns["Any"].Visible = false;
+                this.llibreDataGridView.Columns["Editor"].Visible = false;
+                this.llibreDataGridView.Columns["Colleccio"].Visible = false;
+                this.llibreDataGridView.Columns["NumEdicio"].Visible = false;
+                this.llibreDataGridView.Columns["TipusCoberta"].Visible = false;
+                this.llibreDataGridView.Columns["DataCompra"].Visible = false;
+                this.llibreDataGridView.Columns["NumPagines"].Visible = false;
+                this.llibreDataGridView.Columns["Comentaris"].Visible = false;
+                this.llibreDataGridView.Columns["IdLlibre"].Visible = false;
+                this.llibreDataGridView.Columns["IdIdioma"].Visible = false;
+                this.llibreDataGridView.Columns["IdLocalitzacio"].Visible = false;
+                //
+                dtLlibresAct = true;
+                lbllibresTrobats.Text = DtBusquedaLlibre.Rows.Count.ToString();
+            }
+            else if (dr == DialogResult.Cancel)
+            {
+                // statements executed if boolean-expression-2 is true   
+                formBusqueda.Close();
+            }
+            else
+            {
+                formBusqueda.Close();
+            }
         }
         private void BtSortir_Click(object sender, EventArgs e)
         {
@@ -251,119 +434,26 @@ namespace Biblioteca
         /*
          * LLIBRES
          */
+        private void llibreDataGridView_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            // Actualitzem el llibre
+            this.RefrescLlibre();
+            // Posem el focus en la pestanya llibre
+            this.tbPrincipal.SelectedIndex = 1;
+        }
         private void LlibreDataGridView_SelectionChanged(object sender, EventArgs e)
         {
-            int IdAutorLlibre = 0;
-            string nomAutor = "";
-            string idioma = "";
-            string casa = "";
-            string habitacio = "";
-            //            
-            if (dtLlibresAct && llibreDataGridView.CurrentRow != null)
-            {
-                DataGridViewRow filaLlibre = this.llibreDataGridView.Rows[llibreDataGridView.CurrentRow.Index];
-                //LLIBRE
-                titolTextBox.Text = filaLlibre.Cells[1].Value.ToString();
-                anyDateTimePicker.Text = filaLlibre.Cells[2].Value.ToString();
-                editorTextBox.Text = filaLlibre.Cells[3].Value.ToString();
-                colleccioTextBox.Text = filaLlibre.Cells[4].Value.ToString();
-                numEdicioTextBox.Text = filaLlibre.Cells[5].Value.ToString();
-                tipusCobertaTextBox.Text = filaLlibre.Cells[6].Value.ToString();
-                dataCompraDateTimePicker.Text = filaLlibre.Cells[7].Value.ToString();
-                numPaginesTextBox.Text = filaLlibre.Cells[8].Value.ToString();
-                comentarisTextBox.Text = filaLlibre.Cells[9].Value.ToString();
-                // AUTOR_LLIBRE
-                stringSql = "SELECT IdAutor FROM AUTOR_LLIBRE WHERE IdLlibre = " + filaLlibre.Cells[0].Value;
-                IdAutorLlibre = bbddConn.GetIdAutor(stringSql);
-                // ID AUTOR
-                if (IdAutorLlibre != 0)
-                {
-                    foreach (DataRow filaAutor in DtAutor.Rows)
-                    {
-                        if (IdAutorLlibre == (Int32)filaAutor["IdAutor"])
-                        {
-                            nomAutor = filaAutor["NomComplet"].ToString();
-                        }
-                        // NOM AUTOR
-                        cbAutor.SelectedIndex = cbAutor.FindStringExact(nomAutor);
-                    }
-                }
-                // IDIOMA
-                if (filaLlibre.Cells[10].Value != DBNull.Value)
-                {
-                    if ((Int32)filaLlibre.Cells[10].Value != 0)
-                    {
-                        foreach (DataRow filaIdioma in DtIdioma.Rows)
-                        {
-                            if ((Int32)filaLlibre.Cells[10].Value == (Int32)filaIdioma["IdIdioma"])
-                            {
-                                idioma = filaIdioma["Idioma"].ToString();
-                            }
-                        }
-                        // IDIOMA LLIBRE
-                        cbIdiomaLlibres.SelectedIndex = cbIdiomaLlibres.FindStringExact(idioma);
-                    }
-                }
-                // ESTIL
-                estilLlibreTextBox.Clear();
-                EstilsLlibreSelec.Clear();
-                if (filaLlibre.Cells[0].Value != DBNull.Value)
-                {
-                    if ((Int32)filaLlibre.Cells[0].Value != 0)
-                    {
-                        foreach (DataRow filaEstilLlibre in DtEstilLlibre.Rows)
-                        {
-                            if ((Int32)filaLlibre.Cells[0].Value == (Int32)filaEstilLlibre["IdLlibre"])
-                            {
-                                foreach (DataRow filaEstil in DtEstil.Rows)
-                                {
-                                    if ((Int32)filaEstilLlibre["IdEstil"] == (Int32)filaEstil["IdEstil"])
-                                    {
-                                        estilLlibreTextBox.AppendText(filaEstil["Estil"].ToString());
-                                        estilLlibreTextBox.AppendText(Environment.NewLine);
-                                        EstilsLlibreSelec.Add(filaEstil["Estil"].ToString());
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-                //LOCALITZACIO
-                if (filaLlibre.Cells[11].Value != DBNull.Value)
-                {
-                    if ((Int32)filaLlibre.Cells[11].Value != 0)
-                    {
-                        foreach (object item in cbLocalitzacio.Items)
-                        {
-                            DataRowView filaLocalitzacio = item as DataRowView;
-                            if (filaLocalitzacio != null)
-                            {
-                                if ((Int32)filaLocalitzacio["IdLocalitzacio"] == (Int32)filaLlibre.Cells[11].Value)
-                                {
-                                    casa = filaLocalitzacio["Casa"].ToString();
-                                    habitacio = filaLocalitzacio["Habitacio"].ToString();
-                                    IdLocalActiu = (Int32)filaLocalitzacio["IdLocalitzacio"];
-                                    //
-                                    cbLocalSelectedIndex = cbLocalitzacio.Items.IndexOf(item);
-                                }
-                            }
-                            else
-                            {
-                                // error: item was not of type DataRowView
-                            }
-                        }
-                    }
-                }
-                // LOCALITZACIO LLIBRE
-                cbLocalitzacio.SelectedIndex = cbLocalSelectedIndex;
-                habitacioTextBox.Text = habitacio;
-            }
+            // Actualitzem el llibre
+            this.RefrescLlibre();
         }
         private void BtAfegirLlibres_Click(object sender, EventArgs e)
         {
             //Habiltem / Deshabilitem camps.
-            this.tlpLlibres7.Enabled = true;
+            this.cbLocalitzacio.Enabled = true;
+            this.comentarisTextBox.ReadOnly = false;
+            //this.tlpLlibres7.Enabled = true;
             this.tlpLlibres8.Enabled = true;
+            this.tplTitol.Enabled = true;
             btCancelarLlibres.Visible = true;
             btGuardarLlibres.Visible = true;
             //
@@ -374,46 +464,43 @@ namespace Biblioteca
             //
             llibreDataGridView.Enabled = false;
             // Netegem camps
-            titolTextBox.Clear();
-            editorTextBox.Clear();
-            colleccioTextBox.Clear();
-            numEdicioTextBox.Clear();
-            tipusCobertaTextBox.Clear();
-            numPaginesTextBox.Clear();
-            habitacioTextBox.Clear();
-            estilLlibreTextBox.Clear();
-            comentarisTextBox.Clear();
-            //
-            cbAutor.SelectedIndex = cbAutor.FindStringExact("");
-            cbIdiomaLlibres.SelectedIndex = cbAutor.FindStringExact("");
-            cbLocalitzacio.SelectedIndex = cbLocalitzacio.FindStringExact("");
-            //
-            anyDateTimePicker.Value = DateTime.Today;
-            dataCompraDateTimePicker.Value = DateTime.Today;
+            netejaCampsLlibre();
             // Portem el punter en el primer camp d'edició.
             titolTextBox.Focus();
             afegirLlibre = true;
-        }
+            editantLlibre = true;
+        }       
         private void BtModificarLlibres_Click(object sender, EventArgs e)
         {
-            //Habiltem / Deshabilitem camps.
-            this.tlpLlibres7.Enabled = true;
-            this.tlpLlibres8.Enabled = true;
-            btCancelarLlibres.Visible = true;
-            btGuardarLlibres.Visible = true;
-            //
-            btAfegirLlibres.Visible = false;
-            btModificarLlibres.Visible = false;
-            btEliminarLlibres.Visible = false;
-            btTornarLlibres.Visible = false;
-            //
-            llibreDataGridView.Enabled = false;
-            // Portem el punter en el primer camp d'edició.
-            titolTextBox.Focus();
+            if (llibreDataGridView.CurrentRow != null)
+            {
+                //Habiltem / Deshabilitem camps.
+                this.cbLocalitzacio.Enabled = true;
+                this.comentarisTextBox.ReadOnly = false;
+                //this.tlpLlibres7.Enabled = true;
+                this.tlpLlibres8.Enabled = true;
+                this.tplTitol.Enabled = true;
+                btCancelarLlibres.Visible = true;
+                btGuardarLlibres.Visible = true;
+                //
+                btAfegirLlibres.Visible = false;
+                btModificarLlibres.Visible = false;
+                btEliminarLlibres.Visible = false;
+                btTornarLlibres.Visible = false;
+                //
+                llibreDataGridView.Enabled = false;
+                // Portem el punter en el primer camp d'edició.
+                titolTextBox.Focus();
+                editantLlibre = true;
+            }
+            else
+            {
+                MessageBox.Show("No tens cap llibre seleccionat.", "Modificar llibre", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
         private void BtGuardarLlibres_Click(object sender, EventArgs e)
         {
-            if (dtLlibresAct) // GUARDAR LLIBRE
+            if ((dtLlibresAct) || (afegirLlibre)) // GUARDAR LLIBRE
             {
                 // Assegurem que tenim, com a mínim, títol del llibre.
                 if (titolTextBox.Text.Length != 0)
@@ -473,11 +560,14 @@ namespace Biblioteca
                         }
                     }
                     // Mirem si s'ha seleccionat alguna localitzacio
-                    foreach (DataRow filaLocalitzacio in DtLocalitzacio.Rows)
+                    if (cbLocalitzacio.SelectedValue != null)
                     {
-                        if ((Int32)cbLocalitzacio.SelectedValue == (Int32)filaLocalitzacio["IdLocalitzacio"])
+                        foreach (DataRow filaLocalitzacio in DtLocalitzacio.Rows)
                         {
-                            idLocal = (Int32)filaLocalitzacio["IdLocalitzacio"];
+                            if ((Int32)cbLocalitzacio.SelectedValue == (Int32)filaLocalitzacio["IdLocalitzacio"])
+                            {
+                                idLocal = (Int32)filaLocalitzacio["IdLocalitzacio"];
+                            }
                         }
                     }
                     // Mirem si s'ha seleccionat algun autor
@@ -638,8 +728,11 @@ namespace Biblioteca
                 }
             }
             //Habiltem / Deshabilitem camps.
-            this.tlpLlibres7.Enabled = false;
+            this.cbLocalitzacio.Enabled = false;
+            this.comentarisTextBox.ReadOnly = true;
+            //this.tlpLlibres7.Enabled = false;
             this.tlpLlibres8.Enabled = false;
+            this.tplTitol.Enabled = false;
             //
             btAfegirLlibres.Visible = true;
             btModificarLlibres.Visible = true;
@@ -651,32 +744,23 @@ namespace Biblioteca
             //
             llibreDataGridView.Enabled = true;
             // Netegem camps
-            titolTextBox.Clear();
-            anyDateTimePicker.Value = DateTime.Today;
-            editorTextBox.Clear();
-            colleccioTextBox.Clear();
-            numEdicioTextBox.Clear();
-            tipusCobertaTextBox.Clear();
-            dataCompraDateTimePicker.Value = DateTime.Today;
-            numPaginesTextBox.Clear();
-            habitacioTextBox.Clear();
-            estilLlibreTextBox.Clear();
-            comentarisTextBox.Clear();
-            //
-            CarregarCombos();
-            cbAutor.SelectedIndex = cbAutor.FindStringExact("");
-            cbIdiomaLlibres.SelectedIndex = cbAutor.FindStringExact("");
-            cbLocalitzacio.SelectedIndex = cbLocalitzacio.FindStringExact("");
+            netejaCampsLlibre();
             // Actualitzem el grid d'estils
             ActualGridLlibre();
             //
             afegirLlibre = false;
+            editantLlibre = false;
         }
         private void BtCancelarLlibres_Click(object sender, EventArgs e)
         {
+            llibreDataGridView.CurrentCell = null;
+            //
             //Habiltem / Deshabilitem camps.
-            this.tlpLlibres7.Enabled = false;
+            this.cbLocalitzacio.Enabled = false;
+            this.comentarisTextBox.ReadOnly = true;
+            //this.tlpLlibres7.Enabled = false;
             this.tlpLlibres8.Enabled = false;
+            this.tplTitol.Enabled = false;
             btCancelarLlibres.Visible = false;
             btGuardarLlibres.Visible = false;
             //
@@ -687,94 +771,78 @@ namespace Biblioteca
             //
             llibreDataGridView.Enabled = true;
             // Netegem camps
-            titolTextBox.Clear();
-            editorTextBox.Clear();
-            colleccioTextBox.Clear();
-            numEdicioTextBox.Clear();
-            tipusCobertaTextBox.Clear();
-            numPaginesTextBox.Clear();
-            habitacioTextBox.Clear();
-            estilLlibreTextBox.Clear();
-            comentarisTextBox.Clear();
-            //
-            cbAutor.SelectedIndex = cbAutor.FindStringExact("");
-            cbIdiomaLlibres.SelectedIndex = cbAutor.FindStringExact("");
-            cbLocalitzacio.SelectedIndex = cbLocalitzacio.FindStringExact("");
-            //
-            anyDateTimePicker.Value = DateTime.Today;
-            dataCompraDateTimePicker.Value = DateTime.Today;
+            netejaCampsLlibre();
             //
             afegirLlibre = false;
+            editantLlibre = false;
         }
         private void BtEliminarLlibres_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Estàs segur que vols eliminar aquest llibre i totes les seves referencies?", "Elimina", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            if (llibreDataGridView.CurrentRow != null)
             {
-                DataGridViewRow filaLlibre = this.llibreDataGridView.Rows[llibreDataGridView.CurrentRow.Index];
-                int IdLlibre = (Int32)filaLlibre.Cells[0].Value;
-                // Eliminem totes les relacions del llibre amb l'autor.
-                int resultat = bbddConn.InsUpdDel("DELETE FROM AUTOR_LLIBRE WHERE IdLlibre=" + IdLlibre);
-                if (resultat == 1)
+                dtLlibresAct = false;
+                if (MessageBox.Show("Estàs segur que vols eliminar aquest llibre i totes les seves referencies?", "Elimina", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
-                    // Eliminem totes les relacions del llibre amb els estils.
-                    resultat = bbddConn.InsUpdDel("DELETE FROM ESTIL_LLIBRE WHERE IdLlibre=" + IdLlibre);
+                    DataGridViewRow filaLlibre = this.llibreDataGridView.Rows[llibreDataGridView.CurrentRow.Index];
+                    int IdLlibre = (Int32)filaLlibre.Cells[0].Value;
+                    // Eliminem totes les relacions del llibre amb l'autor.
+                    int resultat = bbddConn.InsUpdDel("DELETE FROM AUTOR_LLIBRE WHERE IdLlibre=" + IdLlibre);
                     if (resultat == 1)
                     {
-                        // Eliminem el llibre.
-                        resultat = bbddConn.InsUpdDel("DELETE FROM LLIBRE WHERE IdLlibre=" + IdLlibre);
+                        // Eliminem totes les relacions del llibre amb els estils.
+                        resultat = bbddConn.InsUpdDel("DELETE FROM ESTIL_LLIBRE WHERE IdLlibre=" + IdLlibre);
                         if (resultat == 1)
                         {
-                            MessageBox.Show("Llibre eliminat correctament, així com totes les seves referències a l'autor i als estils.", "Eliminar Llibre", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            // Eliminem el llibre.
+                            resultat = bbddConn.InsUpdDel("DELETE FROM LLIBRE WHERE IdLlibre=" + IdLlibre);
+                            if (resultat == 1)
+                            {
+                                MessageBox.Show("Llibre eliminat correctament, així com totes les seves referències a l'autor i als estils.", "Eliminar Llibre", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }
+                            else
+                            {
+                                MessageBox.Show("Hi ha hagut un problema eliminant el registre.", "Eliminar Llibre", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("Hi ha hagut un problema eliminant el registre.", "Eliminar Llibre", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("Hi ha hagut un problema eliminant els estils del llibre.", "Eliminar Llibre", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Hi ha hagut un problema eliminant els estils del llibre.", "Eliminar Llibre", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Hi ha hagut un problema eliminant el llibre de l'autor.", "Eliminar Llibre", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Hi ha hagut un problema eliminant el llibre de l'autor.", "Eliminar Llibre", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-
+                llibreDataGridView.CurrentCell = null;
+                //
                 //Habiltem / Deshabilitem camps.
-                this.tlpLlibres7.Enabled = false;
+                this.cbLocalitzacio.Enabled = false;
+                this.comentarisTextBox.ReadOnly = true;
+                //this.tlpLlibres7.Enabled = false;
                 this.tlpLlibres8.Enabled = false;
+                this.tplTitol.Enabled = false;
+                btCancelarLlibres.Visible = false;
+                btGuardarLlibres.Visible = false;
                 //
                 btAfegirLlibres.Visible = true;
                 btModificarLlibres.Visible = true;
                 btEliminarLlibres.Visible = true;
                 btTornarLlibres.Visible = true;
                 //
-                btCancelarLlibres.Visible = false;
-                btGuardarLlibres.Visible = false;
-                //
                 llibreDataGridView.Enabled = true;
                 // Netegem camps
-                titolTextBox.Clear();
-                anyDateTimePicker.Value = DateTime.Today;
-                editorTextBox.Clear();
-                colleccioTextBox.Clear();
-                numEdicioTextBox.Clear();
-                tipusCobertaTextBox.Clear();
-                dataCompraDateTimePicker.Value = DateTime.Today;
-                numPaginesTextBox.Clear();
-                habitacioTextBox.Clear();
-                estilLlibreTextBox.Clear();
-                comentarisTextBox.Clear();
-                //
-                cbAutor.SelectedIndex = cbAutor.FindStringExact("");
-                cbIdiomaLlibres.SelectedIndex = cbAutor.FindStringExact("");
-                cbLocalitzacio.SelectedIndex = cbLocalitzacio.FindStringExact("");
+                netejaCampsLlibre();
                 // Actualitzem el grid d'estils
                 ActualGridLlibre();
                 CarregarCombos();
                 //
                 afegirLlibre = false;
+                editantLlibre = false;
+            }
+            else
+            {
+                MessageBox.Show("No tens cap llibre seleccionat.", "Eliminar llibre", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         private void btTornarLlibres_Click(object sender, EventArgs e)
@@ -783,32 +851,35 @@ namespace Biblioteca
         }
         private void EstilLlibreTextBox_Click(object sender, EventArgs e)
         {
-            DialogResult dr = new DialogResult();
-            Estils formEstils;
-            //
-            if (afegirLlibre)
+            if (editantLlibre)
             {
-                formEstils = new Estils(DtEstil, true, EstilsLlibreSelec);
-            }
-            else
-            {
-                // Generem la finestra d'estils amb els estils seleccionats.
-                formEstils = new Estils(DtEstil, false, EstilsLlibreSelec);
+                DialogResult dr = new DialogResult();
+                Estils formEstils;
+                //
+                if (afegirLlibre)
+                {
+                    formEstils = new Estils(DtEstil, true, EstilsLlibreSelec);
+                }
+                else
+                {
+                    // Generem la finestra d'estils amb els estils seleccionats.
+                    formEstils = new Estils(DtEstil, false, EstilsLlibreSelec);
 
                 
-            }
-            dr = formEstils.ShowDialog();
-            if (dr == DialogResult.OK)
-            {
-                // Guardem els estils seleccionats a la classe.
-                EstilsLlibreSelec = formEstils.nousEstils;
-                formEstils.Dispose();
-                // Mostrem els estils en el camp de text.
-                estilLlibreTextBox.Clear();
-                foreach (string estil in EstilsLlibreSelec)
+                }
+                dr = formEstils.ShowDialog();
+                if (dr == DialogResult.OK)
                 {
-                    estilLlibreTextBox.AppendText(estil);
-                    estilLlibreTextBox.AppendText(Environment.NewLine);
+                    // Guardem els estils seleccionats a la classe.
+                    EstilsLlibreSelec = formEstils.nousEstils;
+                    formEstils.Dispose();
+                    // Mostrem els estils en el camp de text.
+                    estilLlibreTextBox.Clear();
+                    foreach (string estil in EstilsLlibreSelec)
+                    {
+                        estilLlibreTextBox.AppendText(estil);
+                        estilLlibreTextBox.AppendText(Environment.NewLine);
+                    }
                 }
             }
         }
@@ -819,13 +890,14 @@ namespace Biblioteca
         {
             if (dtAutorsAct && autorsDataGridView.CurrentRow != null)
             {
+                netejaCampsAutor();
                 DataGridViewRow filaAutor = this.autorsDataGridView.Rows[autorsDataGridView.CurrentRow.Index];
                 //AUTORS
                 nomTextBox.Text = filaAutor.Cells[1].Value.ToString();
                 cognomsTextBox.Text = filaAutor.Cells[2].Value.ToString();
                 nacionalitatTextBox.Text = filaAutor.Cells[3].Value.ToString();
                 dataNaixementDateTimePicker.Text = filaAutor.Cells[4].Value.ToString();
-                comentarisTextBox1.Text = filaAutor.Cells[5].Value.ToString();
+                comentarisAutorsTextBox.Text = filaAutor.Cells[5].Value.ToString();
                 // ESTIL
                 estilAutorsTextBox.Clear();
                 EstilsAutorSelec.Clear();
@@ -856,7 +928,12 @@ namespace Biblioteca
         private void BtAfegirAutors_Click(object sender, EventArgs e)
         {
             //Habiltem / Deshabilitem camps.
-            this.tlpAutors7.Enabled = true;
+            nomTextBox.Enabled = true;
+            cognomsTextBox.Enabled = true;
+            nacionalitatTextBox.Enabled = true;
+            dataNaixementDateTimePicker.Enabled = true;
+            comentarisAutorsTextBox.ReadOnly = false;
+            //this.tlpAutors7.Enabled = true;
             //
             btAfegirAutors.Visible = false;
             btModificarAutors.Visible = false;
@@ -868,33 +945,42 @@ namespace Biblioteca
             //
             autorsDataGridView.Enabled = false;
             // Netegem camps
-            nomTextBox.Clear();
-            cognomsTextBox.Clear();
-            nacionalitatTextBox.Clear();
-            dataNaixementDateTimePicker.Value = DateTime.Today;
-            estilAutorsTextBox.Clear();
-            comentarisTextBox1.Clear();
+            netejaCampsAutor();
             // Portem el punter en el primer camp d'edició.
             nomTextBox.Focus();
             //
             afegirAutor = true;
+            editantAutor = true;
         }
         private void BtModificarAutors_Click(object sender, EventArgs e)
         {
-            //Habiltem / Deshabilitem camps.
-            this.tlpAutors7.Enabled = true;
-            //
-            btAfegirAutors.Visible = false;
-            btModificarAutors.Visible = false;
-            btEliminarAutors.Visible = false;
-            btTornarAutors.Visible = false;
-            //
-            btCancelarAutors.Visible = true;
-            btGuardarAutors.Visible = true;
-            //
-            autorsDataGridView.Enabled = false;
-            // Portem el punter en el primer camp d'edició.
-            nomTextBox.Focus();
+            if (autorsDataGridView.CurrentRow != null)
+            {
+                //Habiltem / Deshabilitem camps.
+                nomTextBox.Enabled = true;
+                cognomsTextBox.Enabled = true;
+                nacionalitatTextBox.Enabled = true;
+                dataNaixementDateTimePicker.Enabled = true;
+                comentarisAutorsTextBox.ReadOnly = false;
+                //this.tlpAutors7.Enabled = true;
+                //
+                btAfegirAutors.Visible = false;
+                btModificarAutors.Visible = false;
+                btEliminarAutors.Visible = false;
+                btTornarAutors.Visible = false;
+                //
+                btCancelarAutors.Visible = true;
+                btGuardarAutors.Visible = true;
+                //
+                autorsDataGridView.Enabled = false;
+                // Portem el punter en el primer camp d'edició.
+                nomTextBox.Focus();
+                editantAutor = true;
+            }
+            else
+            {
+                MessageBox.Show("No tens cap autor seleccionat.", "Modificar Autor", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
         private void BtGuardarAutors_Click(object sender, EventArgs e)
         {
@@ -926,9 +1012,9 @@ namespace Biblioteca
                             nacionalitat = nacionalitatTextBox.Text;
                         }
                         // Mirem si s'ha definit algun comentari
-                        if (comentarisTextBox1.Text.Length != 0)
+                        if (comentarisAutorsTextBox.Text.Length != 0)
                         {
-                            comentaris = comentarisTextBox1.Text;
+                            comentaris = comentarisAutorsTextBox.Text;
                         }
                         string sqlQuery = "INSERT INTO AUTORS (Nom, Cognoms, Nacionalitat, DataNaixement, Comentaris) VALUES (?, ?, ?, ?, ?)";
                         int idAutor = bbddConn.InsertAutor(sqlQuery,nom,cognoms,nacionalitat,dataNaixementDateTimePicker.Value,comentaris);
@@ -984,7 +1070,7 @@ namespace Biblioteca
                             int idAutor = (Int32)filaAutor.Cells[0].Value;
                             //
                             string sqlQuery = "UPDATE AUTORS SET Nom=?, Cognoms=?, Nacionalitat=?, DataNaixement=?, Comentaris=? WHERE IdAutor=" + idAutor; 
-                            int resultat = bbddConn.UpdateAutor(sqlQuery, nomTextBox.Text, cognomsTextBox.Text, nacionalitatTextBox.Text, dataNaixementDateTimePicker.Value, comentarisTextBox1.Text);
+                            int resultat = bbddConn.UpdateAutor(sqlQuery, nomTextBox.Text, cognomsTextBox.Text, nacionalitatTextBox.Text, dataNaixementDateTimePicker.Value, comentarisAutorsTextBox.Text);
                             //
                             if (resultat == 1)
                             {
@@ -1039,7 +1125,12 @@ namespace Biblioteca
                 }
             }
             //Habiltem / Deshabilitem camps.
-            this.tlpAutors7.Enabled = false;
+            nomTextBox.Enabled = false;
+            cognomsTextBox.Enabled = false;
+            nacionalitatTextBox.Enabled = false;
+            dataNaixementDateTimePicker.Enabled = false;
+            comentarisAutorsTextBox.ReadOnly = true;
+            //this.tlpAutors7.Enabled = false;
             //
             btAfegirAutors.Visible = true;
             btModificarAutors.Visible = true;
@@ -1051,21 +1142,23 @@ namespace Biblioteca
             //
             autorsDataGridView.Enabled = true;
             // Netegem camps
-            nomTextBox.Clear();
-            cognomsTextBox.Clear();
-            nacionalitatTextBox.Clear();
-            dataNaixementDateTimePicker.Value = DateTime.Today;
-            estilAutorsTextBox.Clear();
-            comentarisTextBox1.Clear();
+            netejaCampsAutor();
             //
             afegirAutor = false;
+            editantAutor = false;
             ActualGridAutor();
             CarregarCombos();
         }
         private void BtCancelarAutors_Click(object sender, EventArgs e)
         {
+            autorsDataGridView.CurrentCell = null;
             //Habiltem / Deshabilitem camps.
-            this.tlpAutors7.Enabled = false;
+            nomTextBox.Enabled = false;
+            cognomsTextBox.Enabled = false;
+            nacionalitatTextBox.Enabled = false;
+            dataNaixementDateTimePicker.Enabled = false;
+            comentarisAutorsTextBox.ReadOnly = true;
+            //this.tlpAutors7.Enabled = false;
             //
             btAfegirAutors.Visible = true;
             btModificarAutors.Visible = true;
@@ -1077,74 +1170,85 @@ namespace Biblioteca
             //
             autorsDataGridView.Enabled = true;
             // Netegem camps
-            nomTextBox.Clear();
-            cognomsTextBox.Clear();
-            nacionalitatTextBox.Clear();
-            dataNaixementDateTimePicker.Value = DateTime.Today;
-            estilAutorsTextBox.Clear();
-            comentarisTextBox1.Clear();
+            netejaCampsAutor();
             //
             afegirAutor = false;
+            editantAutor = false;
         }
         private void BtEliminarAutors_Click(object sender, EventArgs e)
         {
-            if (dtAutorsAct && autorsDataGridView.CurrentRow != null)
+            if (autorsDataGridView.CurrentRow != null)
             {
-                if (MessageBox.Show("Estàs segur que vols eliminar aquest autor i totes les seves referències?", "Elimina", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (dtAutorsAct && autorsDataGridView.CurrentRow != null)
                 {
-                    DataGridViewRow filaAutor = this.autorsDataGridView.Rows[autorsDataGridView.CurrentRow.Index];
-                    int IdAutor = (Int32)filaAutor.Cells[0].Value;
-                    // Eliminem totes les relacions de l'autor amb els llibres.
-                    int resultat = bbddConn.InsUpdDel("DELETE FROM AUTOR_LLIBRE WHERE IdAutor=" + IdAutor);
-                    if (resultat == 1)
+                    if (MessageBox.Show("Estàs segur que vols eliminar aquest autor i totes les seves referències?", "Elimina", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
-                        // Eliminem totes les relacions de l'autor amb els estils.
-                        resultat = bbddConn.InsUpdDel("DELETE FROM ESTIL_AUTOR WHERE IdAutor=" + IdAutor);
-                        if (resultat ==1)
+                        DataGridViewRow filaAutor = this.autorsDataGridView.Rows[autorsDataGridView.CurrentRow.Index];
+                        int IdAutor = (Int32)filaAutor.Cells[0].Value;
+                        if (IdAutor != 83)
                         {
-                            // Eliminem l'autor.
-                            resultat = bbddConn.InsUpdDel("DELETE FROM AUTORS WHERE IdAutor=" + IdAutor);
+                            // Eliminem totes les relacions de l'autor amb els llibres.
+                            int resultat = bbddConn.InsUpdDel("DELETE FROM AUTOR_LLIBRE WHERE IdAutor=" + IdAutor);
                             if (resultat == 1)
                             {
-                                MessageBox.Show("Autor eliminat correctament, així com totes les seves referències als llibres i als estils.", "Eliminar Autor", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                // Eliminem totes les relacions de l'autor amb els estils.
+                                resultat = bbddConn.InsUpdDel("DELETE FROM ESTIL_AUTOR WHERE IdAutor=" + IdAutor);
+                                if (resultat == 1)
+                                {
+                                    // Eliminem l'autor.
+                                    resultat = bbddConn.InsUpdDel("DELETE FROM AUTORS WHERE IdAutor=" + IdAutor);
+                                    if (resultat == 1)
+                                    {
+                                        MessageBox.Show("Autor eliminat correctament, així com totes les seves referències als llibres i als estils.", "Eliminar Autor", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    }
+                                    else
+                                    {
+                                        MessageBox.Show("Hi ha hagut un problema eliminant el registre.", "Eliminar Autor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    }
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Hi ha hagut un problema eliminant els estils de l'autor.", "Eliminar Autor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
                             }
                             else
                             {
-                                MessageBox.Show("Hi ha hagut un problema eliminant el registre.", "Eliminar Autor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show("Hi ha hagut un problema eliminant l'autor dels llibres.", "Eliminar Autor", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
                         else
                         {
-                            MessageBox.Show("Hi ha hagut un problema eliminant els estils de l'autor.", "Eliminar Autor", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("No es pot eliminar aquest autor.", "Eliminar Autor", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
-                    else
-                    {
-                        MessageBox.Show("Hi ha hagut un problema eliminant l'autor dels llibres.", "Eliminar Autor", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    //Habiltem / Deshabilitem camps.
+                    nomTextBox.Enabled = false;
+                    cognomsTextBox.Enabled = false;
+                    nacionalitatTextBox.Enabled = false;
+                    dataNaixementDateTimePicker.Enabled = false;
+                    comentarisAutorsTextBox.ReadOnly = true;
+                    //this.tlpAutors7.Enabled = false;
+                    //
+                    btAfegirAutors.Visible = true;
+                    btModificarAutors.Visible = true;
+                    btEliminarAutors.Visible = true;
+                    btTornarAutors.Visible = true;
+                    //
+                    btCancelarAutors.Visible = false;
+                    btGuardarAutors.Visible = false;
+                    //
+                    autorsDataGridView.Enabled = true;
+                    // Netegem camps
+                    netejaCampsAutor();
+                    // Actualitzem el grid d'estils
+                    ActualGridAutor();
+                    CarregarCombos();
+                    editantAutor = false;
                 }
-                //Habiltem / Deshabilitem camps.
-                this.tlpAutors7.Enabled = false;
-                //
-                btAfegirAutors.Visible = true;
-                btModificarAutors.Visible = true;
-                btEliminarAutors.Visible = true;
-                btTornarAutors.Visible = true;
-                //
-                btCancelarAutors.Visible = false;
-                btGuardarAutors.Visible = false;
-                //
-                autorsDataGridView.Enabled = true;
-                // Netegem camps
-                nomTextBox.Clear();
-                cognomsTextBox.Clear();
-                nacionalitatTextBox.Clear();
-                dataNaixementDateTimePicker.Value = DateTime.Today;
-                estilAutorsTextBox.Clear();
-                comentarisTextBox1.Clear();
-                // Actualitzem el grid d'estils
-                ActualGridAutor();
-                CarregarCombos();
+            }
+            else
+            {
+                MessageBox.Show("No tens cap autor seleccionat.", "Eliminar Autor", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         private void BtTornarAutors_Click(object sender, EventArgs e)
@@ -1153,30 +1257,33 @@ namespace Biblioteca
         }
         private void estilAutorsTextBox_Click(object sender, EventArgs e)
         {
-            DialogResult dr = new DialogResult();
-            Estils formEstils;
-            //
-            if (afegirAutor)
+            if (editantAutor)
             {
-                formEstils = new Estils(DtEstil, true, EstilsAutorSelec);
-            }
-            else
-            {
-                // Generem la finestra d'estils amb els estils seleccionats.
-                formEstils = new Estils(DtEstil, false, EstilsAutorSelec);
-            }
-            dr = formEstils.ShowDialog();
-            if (dr == DialogResult.OK)
-            {
-                // Guardem els estils seleccionats a la classe.
-                EstilsAutorSelec = formEstils.nousEstils;
-                formEstils.Dispose();
-                // Mostrem els estils en el camp de text.
-                estilAutorsTextBox.Clear();
-                foreach (string estil in EstilsAutorSelec)
+                DialogResult dr = new DialogResult();
+                Estils formEstils;
+                //
+                if (afegirAutor)
                 {
-                    estilAutorsTextBox.AppendText(estil);
-                    estilAutorsTextBox.AppendText(Environment.NewLine);
+                    formEstils = new Estils(DtEstil, true, EstilsAutorSelec);
+                }
+                else
+                {
+                    // Generem la finestra d'estils amb els estils seleccionats.
+                    formEstils = new Estils(DtEstil, false, EstilsAutorSelec);
+                }
+                dr = formEstils.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    // Guardem els estils seleccionats a la classe.
+                    EstilsAutorSelec = formEstils.nousEstils;
+                    formEstils.Dispose();
+                    // Mostrem els estils en el camp de text.
+                    estilAutorsTextBox.Clear();
+                    foreach (string estil in EstilsAutorSelec)
+                    {
+                        estilAutorsTextBox.AppendText(estil);
+                        estilAutorsTextBox.AppendText(Environment.NewLine);
+                    }
                 }
             }
         }
@@ -1187,6 +1294,7 @@ namespace Biblioteca
         {
             if (dtIdiomesAct && idiomaDataGridView.CurrentRow != null)
             {
+                idiomaTextBox.Clear();
                 DataGridViewRow filaIdioma = this.idiomaDataGridView.Rows[idiomaDataGridView.CurrentRow.Index];
                 idiomaTextBox.Text = filaIdioma.Cells[1].Value.ToString();
             }
@@ -1214,20 +1322,27 @@ namespace Biblioteca
         }
         private void BtModificarIdiomes_Click(object sender, EventArgs e)
         {
-            //Habiltem / Deshabilitem camps.
-            this.tlpIdioma7.Enabled = true;
-            //
-            btAfegirIdiomes.Visible = false;
-            btModificarIdiomes.Visible = false;
-            btEliminarIdiomes.Visible = false;
-            btTornarIdiomes.Visible = false;
-            //
-            btCancelarIdiomes.Visible = true;
-            btGuardarIdiomes.Visible = true;
-            //
-            idiomaDataGridView.Enabled = false;
-            // Portem el punter en el primer camp d'edició.
-            idiomaTextBox.Focus();
+            if (idiomaDataGridView.CurrentRow != null)
+            {
+                //Habiltem / Deshabilitem camps.
+                this.tlpIdioma7.Enabled = true;
+                //
+                btAfegirIdiomes.Visible = false;
+                btModificarIdiomes.Visible = false;
+                btEliminarIdiomes.Visible = false;
+                btTornarIdiomes.Visible = false;
+                //
+                btCancelarIdiomes.Visible = true;
+                btGuardarIdiomes.Visible = true;
+                //
+                idiomaDataGridView.Enabled = false;
+                // Portem el punter en el primer camp d'edició.
+                idiomaTextBox.Focus();
+            }
+            else
+            {
+                MessageBox.Show("No tens cap idioma seleccionat.", "Modificar Idioma", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
         private void BtGuardarIdiomes_Click(object sender, EventArgs e)
         {
@@ -1291,6 +1406,7 @@ namespace Biblioteca
         }
         private void BtCancelarIdiomes_Click(object sender, EventArgs e)
         {
+            idiomaDataGridView.CurrentCell = null;
             //Habiltem / Deshabilitem camps.
             this.tlpIdioma7.Enabled = false;
             //
@@ -1310,49 +1426,64 @@ namespace Biblioteca
         }
         private void BtEliminarIdiomes_Click(object sender, EventArgs e)
         {
-            if (dtIdiomesAct && idiomaDataGridView.CurrentRow != null)
+            if (idiomaDataGridView.CurrentRow != null)
             {
-                if (MessageBox.Show("Estàs segur que vols eliminar aquest idioma i totes les seves referències?", "Elimina", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (dtIdiomesAct && idiomaDataGridView.CurrentRow != null)
                 {
-                    DataGridViewRow filaIdioma = this.idiomaDataGridView.Rows[idiomaDataGridView.CurrentRow.Index];
-                    int IdIdioma = (Int32)filaIdioma.Cells[0].Value;
-                    // Eliminem l'idioma de tots els llibres
-                    int resultat = bbddConn.InsUpdDel("UPDATE LLIBRE SET IdIdioma=" + IdIdiomaDesconegut + " WHERE IdIdioma=" + IdIdioma);
-                    if (resultat == 1)
+                    if (MessageBox.Show("Estàs segur que vols eliminar aquest idioma i totes les seves referències?", "Elimina", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
-                        // Eliminem l'idioma
-                        resultat = bbddConn.InsUpdDel("DELETE FROM IDIOMA WHERE IdIdioma=" + IdIdioma);
-                        if (resultat == 1)
+                        DataGridViewRow filaIdioma = this.idiomaDataGridView.Rows[idiomaDataGridView.CurrentRow.Index];
+                        int IdIdioma = (Int32)filaIdioma.Cells[0].Value;
+                        if (IdIdioma != 10)
                         {
-                            MessageBox.Show("idioma eliminat correctament, així com totes les seves referències als llibres.", "Eliminar Idioma", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                            // Eliminem l'idioma de tots els llibres
+                            int resultat = bbddConn.InsUpdDel("UPDATE LLIBRE SET IdIdioma=" + IdIdiomaDesconegut + " WHERE IdIdioma=" + IdIdioma);
+                            if (resultat == 1)
+                            {
+                                // Eliminem l'idioma
+                                resultat = bbddConn.InsUpdDel("DELETE FROM IDIOMA WHERE IdIdioma=" + IdIdioma);
+                                if (resultat == 1)
+                                {
+                                    MessageBox.Show("idioma eliminat correctament, així com totes les seves referències als llibres.", "Eliminar Idioma", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Hi ha hagut un problema eliminant el registre.", "Eliminar Idioma", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Hi ha hagut un problema eliminant l'idioma dels llibres.", "Eliminar Idioma", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("Hi ha hagut un problema eliminant el registre.", "Eliminar Idioma", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("No es pot eliminar aquest idioma.", "Eliminar Idioma", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
-                    else
-                    {
-                        MessageBox.Show("Hi ha hagut un problema eliminant l'idioma dels llibres.", "Eliminar Idioma", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    //Habiltem / Deshabilitem camps.
+                    this.tlpIdioma7.Enabled = false;
+                    //
+                    btAfegirIdiomes.Visible = true;
+                    btModificarIdiomes.Visible = true;
+                    btEliminarIdiomes.Visible = true;
+                    btTornarIdiomes.Visible = true;
+                    //
+                    btCancelarIdiomes.Visible = false;
+                    btGuardarIdiomes.Visible = false;
+                    //
+                    idiomaDataGridView.Enabled = true;
+                    // Netegem camps
+                    idiomaTextBox.Clear();
+                    // Actualitzem el grid d'estils
+                    ActualGridIdioma();
+                    CarregarCombos();
                 }
-                //Habiltem / Deshabilitem camps.
-                this.tlpIdioma7.Enabled = false;
-                //
-                btAfegirIdiomes.Visible = true;
-                btModificarIdiomes.Visible = true;
-                btEliminarIdiomes.Visible = true;
-                btTornarIdiomes.Visible = true;
-                //
-                btCancelarIdiomes.Visible = false;
-                btGuardarIdiomes.Visible = false; 
-                //
-                idiomaDataGridView.Enabled = true;
-                // Netegem camps
-                idiomaTextBox.Clear();
-                // Actualitzem el grid d'estils
-                ActualGridIdioma();
-                CarregarCombos();
+            }
+            else
+            {
+                MessageBox.Show("No tens cap idioma seleccionat.", "Eliminar Idioma", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         private void BtTornarIdiomes_Click(object sender, EventArgs e)
@@ -1366,6 +1497,8 @@ namespace Biblioteca
         {
             if (dtUbicacionsAct && localitzacioDataGridView.CurrentRow != null)
             {
+                casaTextBox.Clear();
+                LlocTextBox.Clear();
                 DataGridViewRow filaLocal = this.localitzacioDataGridView.Rows[localitzacioDataGridView.CurrentRow.Index];
                 casaTextBox.Text = filaLocal.Cells[1].Value.ToString();
                 LlocTextBox.Text = filaLocal.Cells[2].Value.ToString();
@@ -1395,20 +1528,28 @@ namespace Biblioteca
         }
         private void btModificarUbicacions_Click(object sender, EventArgs e)
         {
-            //Habiltem / Deshabilitem camps.
-            this.tlpUbicacions7.Enabled = true;
-            //
-            btAfegirUbicacions.Visible = false;
-            btModificarUbicacions.Visible = false;
-            btEliminarUbicacions.Visible = false;
-            btTornarUbicacions.Visible = false;
-            //
-            btCancelarUbicacions.Visible = true;
-            btGuardarUbicacions.Visible = true;
-            //
-            localitzacioDataGridView.Enabled = false;
-            // Portem el punter en el primer camp d'edició.
-            casaTextBox.Focus();
+            if (localitzacioDataGridView.CurrentRow != null)
+            {
+                //Habiltem / Deshabilitem camps.
+                this.tlpUbicacions7.Enabled = true;
+                //
+                btAfegirUbicacions.Visible = false;
+                btModificarUbicacions.Visible = false;
+                btEliminarUbicacions.Visible = false;
+                btTornarUbicacions.Visible = false;
+                //
+                btCancelarUbicacions.Visible = true;
+                btGuardarUbicacions.Visible = true;
+                //
+                localitzacioDataGridView.Enabled = false;
+                // Portem el punter en el primer camp d'edició.
+                casaTextBox.Focus();
+            }
+            else
+            {
+                MessageBox.Show("No tens cap ubicació seleccionada.", "Modificar Ubicació", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            
         }
         private void btGuardarUbicacions_Click(object sender, EventArgs e)
         {
@@ -1484,6 +1625,7 @@ namespace Biblioteca
         }
         private void btCancelarUbicacions_Click(object sender, EventArgs e)
         {
+            localitzacioDataGridView.CurrentCell = null;
             //Habiltem / Deshabilitem camps.
             this.tlpUbicacions7.Enabled = false;
             //
@@ -1504,50 +1646,64 @@ namespace Biblioteca
         }
         private void btEliminarUbicacions_Click(object sender, EventArgs e)
         {
-            if (dtUbicacionsAct && localitzacioDataGridView.CurrentRow != null)
+            if (localitzacioDataGridView.CurrentRow != null)
             {
-                if (MessageBox.Show("Estàs segur que vols eliminar aquesta ubicació i totes les seves referències?", "Elimina", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (dtUbicacionsAct && localitzacioDataGridView.CurrentRow != null)
                 {
-                    DataGridViewRow filaLocal = this.localitzacioDataGridView.Rows[localitzacioDataGridView.CurrentRow.Index];
-                    int IdLocal = (Int32)filaLocal.Cells[0].Value;
-                    // Eliminem la ubicació de tots els llibres
-                    int resultat = bbddConn.InsUpdDel("UPDATE LLIBRE SET IdLocalitzacio=" + IdLocalitzacioDesconeguda + " WHERE IdLocalitzacio=" + IdLocal);
-                    if (resultat == 1)
+                    if (MessageBox.Show("Estàs segur que vols eliminar aquesta ubicació i totes les seves referències?", "Elimina", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
-                        // Eliminem la localització
-                        resultat = bbddConn.InsUpdDel("DELETE FROM LOCALITZACIO WHERE IdLocalitzacio=" + IdLocal);
-                        if (resultat == 1)
+                        DataGridViewRow filaLocal = this.localitzacioDataGridView.Rows[localitzacioDataGridView.CurrentRow.Index];
+                        int IdLocal = (Int32)filaLocal.Cells[0].Value;
+                        if (IdLocal != 54)
                         {
-                            MessageBox.Show("Ubicació eliminada correctament, així com totes les seves referències als llibres.", "Eliminar Ubicació", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            // Eliminem la ubicació de tots els llibres
+                            int resultat = bbddConn.InsUpdDel("UPDATE LLIBRE SET IdLocalitzacio=" + IdLocalitzacioDesconeguda + " WHERE IdLocalitzacio=" + IdLocal);
+                            if (resultat == 1)
+                            {
+                                // Eliminem la localització
+                                resultat = bbddConn.InsUpdDel("DELETE FROM LOCALITZACIO WHERE IdLocalitzacio=" + IdLocal);
+                                if (resultat == 1)
+                                {
+                                    MessageBox.Show("Ubicació eliminada correctament, així com totes les seves referències als llibres.", "Eliminar Ubicació", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Hi ha hagut un problema eliminant el registre.", "Eliminar Ubicació", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
+                            }
+                            else
+                            {
+                                MessageBox.Show("Hi ha hagut un problema eliminant la ubicació dels llibres.", "Eliminar Ubicació", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("Hi ha hagut un problema eliminant el registre.", "Eliminar Ubicació", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            MessageBox.Show("No pots eliminar aquesta ubicació.", "Eliminar Ubicació", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
-                    else
-                    {
-                        MessageBox.Show("Hi ha hagut un problema eliminant la ubicació dels llibres.", "Eliminar Ubicació", MessageBoxButtons.OK, MessageBoxIcon.Error); 
-                    }
+                    //Habiltem / Deshabilitem camps.
+                    this.tlpUbicacions7.Enabled = false;
+                    //
+                    btAfegirUbicacions.Visible = true;
+                    btModificarUbicacions.Visible = true;
+                    btEliminarUbicacions.Visible = true;
+                    btTornarUbicacions.Visible = true;
+                    //
+                    btCancelarUbicacions.Visible = false;
+                    btGuardarUbicacions.Visible = false;
+                    //
+                    localitzacioDataGridView.Enabled = true;
+                    // Netegem camps
+                    casaTextBox.Clear();
+                    LlocTextBox.Clear();
+                    // Actualitzem el grid d'estils
+                    ActualGridLocalitzacio();
+                    CarregarCombos();
                 }
-                //Habiltem / Deshabilitem camps.
-                this.tlpUbicacions7.Enabled = false;
-                //
-                btAfegirUbicacions.Visible = true;
-                btModificarUbicacions.Visible = true;
-                btEliminarUbicacions.Visible = true;
-                btTornarUbicacions.Visible = true;
-                //
-                btCancelarUbicacions.Visible = false;
-                btGuardarUbicacions.Visible = false;
-                //
-                localitzacioDataGridView.Enabled = true;
-                // Netegem camps
-                casaTextBox.Clear();
-                LlocTextBox.Clear();
-                // Actualitzem el grid d'estils
-                ActualGridLocalitzacio();
-                CarregarCombos();
+            }
+            else
+            {
+                MessageBox.Show("No tens cap ubicació seleccionada.", "Eliminar Ubicació", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         private void btTornarUbicacions_Click(object sender, EventArgs e)
@@ -1561,6 +1717,7 @@ namespace Biblioteca
         {
             if (dtEstilsAct && estilDataGridView.CurrentRow != null)
             {
+                estilTextBox.Clear();
                 DataGridViewRow filaEstil = this.estilDataGridView.Rows[estilDataGridView.CurrentRow.Index];
                 estilTextBox.Text = filaEstil.Cells[1].Value.ToString();
             }
@@ -1588,20 +1745,27 @@ namespace Biblioteca
         }
         private void BtModificarEstils_Click(object sender, EventArgs e)
         {
-            //Habiltem / Deshabilitem camps.
-            this.tlpEstils7.Enabled = true;
-            //
-            btAfegirEstils.Visible = false;
-            btModificarEstils.Visible = false;
-            btEliminarEstils.Visible = false;
-            btTornarEstils.Visible = false;
-            //
-            btCancelarEstils.Visible = true;
-            btGuardarEstils.Visible = true;
-            //
-            estilDataGridView.Enabled = false;
-            // Portem el punter en el primer camp d'edició.
-            estilTextBox.Focus();
+            if (estilDataGridView.CurrentRow != null)
+            {
+                //Habiltem / Deshabilitem camps.
+                this.tlpEstils7.Enabled = true;
+                //
+                btAfegirEstils.Visible = false;
+                btModificarEstils.Visible = false;
+                btEliminarEstils.Visible = false;
+                btTornarEstils.Visible = false;
+                //
+                btCancelarEstils.Visible = true;
+                btGuardarEstils.Visible = true;
+                //
+                estilDataGridView.Enabled = false;
+                // Portem el punter en el primer camp d'edició.
+                estilTextBox.Focus();
+            }
+            else
+            {
+                MessageBox.Show("No tens cap estil seleccionat.", "Modificar Estil", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
         private void BtGuardarEstils_Click(object sender, EventArgs e)
         {
@@ -1665,6 +1829,7 @@ namespace Biblioteca
         }
         private void BtCancelarEstils_Click(object sender, EventArgs e)
         {
+            estilDataGridView.CurrentCell = null;
             //Habiltem / Deshabilitem camps.
             this.tlpEstils7.Enabled = false;
             //
@@ -1684,59 +1849,65 @@ namespace Biblioteca
         }
         private void BtEliminarEstils_Click(object sender, EventArgs e)
         {
-            if (dtEstilsAct && estilDataGridView.CurrentRow != null)
+            if (estilDataGridView.CurrentRow != null)
             {
-                if (MessageBox.Show("Estàs segur que vols eliminar aquest estil i totes les seves referències?", "Elimina", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                if (dtEstilsAct && estilDataGridView.CurrentRow != null)
                 {
-                    DataGridViewRow filaEstil = this.estilDataGridView.Rows[estilDataGridView.CurrentRow.Index];
-                    int IdEstil = (Int32)filaEstil.Cells[0].Value;
-                    // Eliminem l'estil
-                    int resultat = bbddConn.InsUpdDel("DELETE FROM ESTIL WHERE IdEstil=" + IdEstil);
-                    if (resultat == 1)
+                    if (MessageBox.Show("Estàs segur que vols eliminar aquest estil i totes les seves referències?", "Elimina", MessageBoxButtons.YesNo) == DialogResult.Yes)
                     {
+                        DataGridViewRow filaEstil = this.estilDataGridView.Rows[estilDataGridView.CurrentRow.Index];
+                        int IdEstil = (Int32)filaEstil.Cells[0].Value;
                         // Eliminem l'estil de tots els llibres
-                        resultat = bbddConn.InsUpdDel("DELETE FROM ESTIL_LLIBRE WHERE IdEstil=" + IdEstil);
+                        int resultat = bbddConn.InsUpdDel("DELETE FROM ESTIL_LLIBRE WHERE IdEstil=" + IdEstil);
                         if (resultat == 1)
                         {
                             // Eliminem l'estil de tots els autors
                             resultat = bbddConn.InsUpdDel("DELETE FROM ESTIL_AUTOR WHERE IdEstil=" + IdEstil);
                             if (resultat == 1)
                             {
-                                MessageBox.Show("Estil eliminat correctament, així com totes les seves referències a llibres i autors.", "Eliminar Estil", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                                // Eliminem l'estil
+                                resultat = bbddConn.InsUpdDel("DELETE FROM ESTIL WHERE IdEstil=" + IdEstil);
+                                if (resultat == 1)
+                                {
+                                    MessageBox.Show("Estil eliminat correctament, així com totes les seves referències a llibres i autors.", "Eliminar Estil", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Hi ha hagut un problema eliminant el registre.", "Eliminar Estil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                }
                             }
                             else
                             {
-                                MessageBox.Show("Hi ha hagut un problema eliminant l'estil dels llibres.", "Eliminar Estil", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                MessageBox.Show("Hi ha hagut un problema eliminant l'estil dels autors.", "Eliminar Estil", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             }
                         }
-                        else 
+                        else
                         {
                             MessageBox.Show("Hi ha hagut un problema eliminant l'estil dels llibres.", "Eliminar Estil", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
-                    else 
-                    {
-                        MessageBox.Show("Hi ha hagut un problema eliminant el registre.", "Eliminar Estil", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
+                    //Habiltem / Deshabilitem camps.
+                    this.tlpEstils7.Enabled = false;
+                    //
+                    btAfegirEstils.Visible = true;
+                    btModificarEstils.Visible = true;
+                    btEliminarEstils.Visible = true;
+                    btTornarEstils.Visible = true;
+                    //
+                    btCancelarEstils.Visible = false;
+                    btGuardarEstils.Visible = false;
+                    //
+                    estilDataGridView.Enabled = true;
+                    // Netegem camps
+                    estilTextBox.Clear();
+                    // Actualitzem el grid d'estils
+                    ActualGridEstil();
+                    CarregarCombos();
                 }
-                //Habiltem / Deshabilitem camps.
-                this.tlpEstils7.Enabled = false;
-                //
-                btAfegirEstils.Visible = true;
-                btModificarEstils.Visible = true;
-                btEliminarEstils.Visible = true;
-                btTornarEstils.Visible = true;
-                //
-                btCancelarEstils.Visible = false;
-                btGuardarEstils.Visible = false;
-                //
-                estilDataGridView.Enabled = true;
-                // Netegem camps
-                estilTextBox.Clear();
-                // Actualitzem el grid d'estils
-                ActualGridEstil();
-                CarregarCombos();
+            }
+            else
+            {
+                MessageBox.Show("No tens cap estil seleccionat.", "Eliminar Estil", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         private void BtTornarEstils_Click(object sender, EventArgs e)
@@ -1771,6 +1942,8 @@ namespace Biblioteca
             cbLocalitzacio.ValueMember = "IdLocalitzacio";
             cbLocalitzacio.DisplayMember = "Casa";
             cbLocalitzacio.DataSource = DtLocalitzacio;
+            //
+            cbLocalitzacio.SelectedIndex = cbLocalitzacio.FindStringExact("");
             // Combobox Autor
             cbAutor.DataSource = null;
             cbAutor.Items.Clear();
@@ -1794,8 +1967,11 @@ namespace Biblioteca
             stringSql = "SELECT * FROM ESTIL_LLIBRE";
             bbddConn.GetData(stringSql, ref DtEstilLlibre);
             //
+            llibreDataGridView.CurrentCell = null;
             dtEstilsLlibreAct = true;
             dtLlibresAct = true;
+            //
+            lbLlibresTotalsBiblio.Text = DtLlibre.Rows.Count.ToString();
         }
         private void ActualGridAutor()
         {
@@ -1808,6 +1984,7 @@ namespace Biblioteca
             DtEstilAutor.Clear();
             stringSql = "SELECT * FROM ESTIL_AUTOR";
             bbddConn.GetData(stringSql, ref DtEstilAutor);
+            autorsDataGridView.CurrentCell = null;
             dtAutorsAct = true;
         }
         private void ActualGridIdioma()
@@ -1817,6 +1994,7 @@ namespace Biblioteca
             DtIdioma.Clear();
             stringSql = "SELECT * FROM IDIOMA ORDER BY Idioma";
             bbddConn.GetData(stringSql, ref DtIdioma);
+            idiomaDataGridView.CurrentCell = null;
             dtIdiomesAct = true;
         }
         private void ActualGridLocalitzacio()
@@ -1826,6 +2004,7 @@ namespace Biblioteca
             DtLocalitzacio.Clear();
             stringSql = "SELECT * FROM LOCALITZACIO ORDER BY Casa";
             bbddConn.GetData(stringSql, ref DtLocalitzacio);
+            localitzacioDataGridView.CurrentCell = null;
             dtUbicacionsAct = true;
         }
         private void ActualGridEstil()
@@ -1835,123 +2014,148 @@ namespace Biblioteca
             DtEstil.Clear();
             stringSql = "SELECT * FROM ESTIL ORDER BY Estil";
             bbddConn.GetData(stringSql, ref DtEstil);
-            dtEstilsAct= true;
+            estilDataGridView.CurrentCell = null;
+            dtEstilsAct = true;
         }
-        /*
-         * PENDENT ESBORRAR
-         */
-        private void BuscarLlibre()
+        private void RefrescLlibre()
         {
-            DialogResult dr = new DialogResult();
-            BuscarLlibre formBusqueda = new BuscarLlibre();
-            dr = formBusqueda.ShowDialog();
-            if (dr == DialogResult.OK)
+            int IdAutorLlibre = 0;
+            string nomAutor = "";
+            string idioma = "";
+            string casa = "";
+            string habitacio = "";
+            //
+            netejaCampsLlibre();
+            //
+            if (dtLlibresAct && llibreDataGridView.CurrentRow != null)
             {
-                string sqlQuery = "SELECT * FROM LLIBRE WHERE TitoL LIKE % " + formBusqueda.textBusqueda + " %";
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                RefrescCampsLlibres();
-            }
-            else if (dr == DialogResult.Cancel)
-            {
-                // statements executed if boolean-expression-2 is true   
-                formBusqueda.Close();
-            }
-            else
-            {
-                formBusqueda.Close();   
-            }
-        }
-        private void RefrescCampsLlibres()
-        {
-            /*
-            if (loaded == true)
-            {
-                // IDIOMES
-                cbIdiomaLlibres.DataSource = this.biblioDataSet.IDIOMA;
-                cbIdiomaLlibres.DisplayMember = "IDIOMA";
-                cbIdiomaLlibres.ValueMember = "IDIDIOMA";
-                //DataRow[] drLlibre = biblioDataSet.Tables["LLIBRE"].Select("IdLlibre = '" + Int32.Parse(idLlibreTextBox.Text) + "'");
-                try
+                DataGridViewRow filaLlibre = this.llibreDataGridView.Rows[llibreDataGridView.CurrentRow.Index];
+                //LLIBRE
+                titolTextBox.Text = filaLlibre.Cells[1].Value.ToString();
+                anyDateTimePicker.Text = filaLlibre.Cells[2].Value.ToString();
+                editorTextBox.Text = filaLlibre.Cells[3].Value.ToString();
+                colleccioTextBox.Text = filaLlibre.Cells[4].Value.ToString();
+                numEdicioTextBox.Text = filaLlibre.Cells[5].Value.ToString();
+                tipusCobertaTextBox.Text = filaLlibre.Cells[6].Value.ToString();
+                dataCompraDateTimePicker.Text = filaLlibre.Cells[7].Value.ToString();
+                numPaginesTextBox.Text = filaLlibre.Cells[8].Value.ToString();
+                comentarisTextBox.Text = filaLlibre.Cells[9].Value.ToString();
+                // AUTOR_LLIBRE
+                stringSql = "SELECT IdAutor FROM AUTOR_LLIBRE WHERE IdLlibre = " + filaLlibre.Cells[0].Value;
+                IdAutorLlibre = bbddConn.GetIdAutor(stringSql);
+                // ID AUTOR
+                if (IdAutorLlibre != 0)
                 {
-                    //  cbIdiomaLlibres.SelectedValue = Int32.Parse(drLlibre[0]["IdIdioma"].ToString());
+                    foreach (DataRow filaAutor in DtAutor.Rows)
+                    {
+                        if (IdAutorLlibre == (Int32)filaAutor["IdAutor"])
+                        {
+                            nomAutor = filaAutor["NomComplet"].ToString();
+                        }
+                        // NOM AUTOR
+                        cbAutor.SelectedIndex = cbAutor.FindStringExact(nomAutor);
+                    }
                 }
-                catch
+                // IDIOMA
+                if (filaLlibre.Cells[10].Value != DBNull.Value)
                 {
-                    MessageBox.Show("putaEspaña1");
-                    cbIdiomaLlibres.SelectedValue = 0;
+                    if ((Int32)filaLlibre.Cells[10].Value != 0)
+                    {
+                        foreach (DataRow filaIdioma in DtIdioma.Rows)
+                        {
+                            if ((Int32)filaLlibre.Cells[10].Value == (Int32)filaIdioma["IdIdioma"])
+                            {
+                                idioma = filaIdioma["Idioma"].ToString();
+                            }
+                        }
+                        // IDIOMA LLIBRE
+                        cbIdiomaLlibres.SelectedIndex = cbIdiomaLlibres.FindStringExact(idioma);
+                    }
                 }
-                // LOCALITZACIO
-                cbLocalitzacio.DataSource = this.biblioDataSet.LOCALITZACIO;
-                cbLocalitzacio.DisplayMember = "CASA";
-                cbLocalitzacio.ValueMember = "IDLOCALITZACIO";
-                //
-                try
-                {
-                    // cbLocalitzacio.SelectedValue = Int32.Parse(drLlibre[0]["IdLocalitzacio"].ToString());
-                }
-                catch
-                {
-                    MessageBox.Show("putaEspaña2");
-                    cbLocalitzacio.SelectedValue = 0;
-                }
-                //
-                try
-                {
-                    // DataRow[] drLloc = biblioDataSet.Tables["LOCALITZACIO"].Select("IdLocalitzacio = '" + Int32.Parse(drLlibre[0]["IdLocalitzacio"].ToString()) + "'");
-                    //  habitacioTextBox.Text = drLloc[0]["HABITACIO"].ToString();
-                }
-                catch
-                {
-                    MessageBox.Show("putaEspaña3");
-                    habitacioTextBox.Text = "";
-                }
-                // AUTOR
-                cbAutor.DataSource = this.biblioDataSet.AUTORS;
-                cbAutor.DisplayMember = "NomComplet";
-                cbAutor.ValueMember = "IDAUTOR";
-                //DataRow[] drAutorLlibre = biblioDataSet.Tables["AUTOR_LLIBRE"].Select("IdLlibre = '" + Int32.Parse(idLlibreTextBox.Text) + "'");
-                try
-                {
-                    // DataRow[] drAutor = biblioDataSet.Tables["AUTORS"].Select("IdAutor = '" + Int32.Parse(drAutorLlibre[0]["IdAutor"].ToString()) + "'");
-                    // cbAutor.SelectedValue = Int32.Parse(drAutor[0]["IdAutor"].ToString());
-                }
-                catch
-                {
-                    MessageBox.Show("putaEspaña4");
-                    cbAutor.SelectedValue = 0;
-                }
-                // ESTILS
+                // ESTIL
                 estilLlibreTextBox.Clear();
-                //DataRow[] drEstilLlibre = biblioDataSet.Tables["ESTIL_LLIBRE"].Select("IdLlibre = '" + Int32.Parse(idLlibreTextBox.Text) + "'");
-                // DataRow[] drEstils;
-                //MessageBox.Show(drEstilLlbre.Length.ToString());
-                try
+                EstilsLlibreSelec.Clear();
+                if (filaLlibre.Cells[0].Value != DBNull.Value)
                 {
-                    // for (int fila = 0; fila < drEstilLlibre.Length; fila++)
-                    // {
-                    // drEstils = biblioDataSet.Tables["ESTIL"].Select("IdEstil = '" + drEstilLlibre[fila]["IdEstil"] + "'");
-                    //    estilLlibreTextBox.AppendText(drEstils[0]["Estil"].ToString() + Environment.NewLine);
-                    // }
+                    if ((Int32)filaLlibre.Cells[0].Value != 0)
+                    {
+                        foreach (DataRow filaEstilLlibre in DtEstilLlibre.Rows)
+                        {
+                            if ((Int32)filaLlibre.Cells[0].Value == (Int32)filaEstilLlibre["IdLlibre"])
+                            {
+                                foreach (DataRow filaEstil in DtEstil.Rows)
+                                {
+                                    if ((Int32)filaEstilLlibre["IdEstil"] == (Int32)filaEstil["IdEstil"])
+                                    {
+                                        estilLlibreTextBox.AppendText(filaEstil["Estil"].ToString());
+                                        estilLlibreTextBox.AppendText(Environment.NewLine);
+                                        EstilsLlibreSelec.Add(filaEstil["Estil"].ToString());
+                                    }
+                                }
+                            }
+                        }
+                    }
                 }
-                catch
+                //LOCALITZACIO
+                if (filaLlibre.Cells[11].Value != DBNull.Value)
                 {
-                    MessageBox.Show("putaEspaña5");
+                    if ((Int32)filaLlibre.Cells[11].Value != 0)
+                    {
+                        foreach (object item in cbLocalitzacio.Items)
+                        {
+                            DataRowView filaLocalitzacio = item as DataRowView;
+                            if (filaLocalitzacio != null)
+                            {
+                                if ((Int32)filaLocalitzacio["IdLocalitzacio"] == (Int32)filaLlibre.Cells[11].Value)
+                                {
+                                    casa = filaLocalitzacio["Casa"].ToString();
+                                    habitacio = filaLocalitzacio["Habitacio"].ToString();
+                                    IdLocalActiu = (Int32)filaLocalitzacio["IdLocalitzacio"];
+                                    //
+                                    cbLocalSelectedIndex = cbLocalitzacio.Items.IndexOf(item);
+                                }
+                            }
+                            else
+                            {
+                                // error: item was not of type DataRowView
+                            }
+                        }
+                    }
                 }
+                // LOCALITZACIO LLIBRE
+                cbLocalitzacio.SelectedIndex = cbLocalSelectedIndex;
+                habitacioTextBox.Text = habitacio;
             }
-            */
+        }
+        private void netejaCampsLlibre()
+        {
+            // Netegem camps
+            titolTextBox.Clear();
+            editorTextBox.Clear();
+            colleccioTextBox.Clear();
+            numEdicioTextBox.Clear();
+            tipusCobertaTextBox.Clear();
+            numPaginesTextBox.Clear();
+            habitacioTextBox.Clear();
+            estilLlibreTextBox.Clear();
+            comentarisTextBox.Clear();
+            //
+            cbAutor.SelectedIndex = cbAutor.FindStringExact("");
+            cbIdiomaLlibres.SelectedIndex = cbAutor.FindStringExact("");
+            cbLocalitzacio.SelectedIndex = cbLocalitzacio.FindStringExact("");
+            //
+            anyDateTimePicker.Value = DateTime.Today;
+            dataCompraDateTimePicker.Value = DateTime.Today;
+        }
+        private void netejaCampsAutor()
+        {
+            // Netegem camps
+            nomTextBox.Clear();
+            cognomsTextBox.Clear();
+            nacionalitatTextBox.Clear();
+            dataNaixementDateTimePicker.Value = DateTime.Today;
+            estilAutorsTextBox.Clear();
+            comentarisAutorsTextBox.Clear();
         }
     }
 }

@@ -38,7 +38,7 @@
             // 
             this.btCancelar.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btCancelar.Location = new System.Drawing.Point(468, 55);
-            this.btCancelar.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btCancelar.Margin = new System.Windows.Forms.Padding(6);
             this.btCancelar.Name = "btCancelar";
             this.btCancelar.Size = new System.Drawing.Size(159, 43);
             this.btCancelar.TabIndex = 3;
@@ -49,11 +49,11 @@
             // 
             this.btBuscar.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btBuscar.Location = new System.Drawing.Point(468, 6);
-            this.btBuscar.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.btBuscar.Margin = new System.Windows.Forms.Padding(6);
             this.btBuscar.Name = "btBuscar";
             this.btBuscar.Size = new System.Drawing.Size(159, 43);
             this.btBuscar.TabIndex = 2;
-            this.btBuscar.Text = "Buscar";
+            this.btBuscar.Text = "Filtrar";
             this.btBuscar.UseVisualStyleBackColor = true;
             this.btBuscar.Click += new System.EventHandler(this.btBuscar_Click);
             // 
@@ -70,7 +70,7 @@
             // tbCadenaBusqueda
             // 
             this.tbCadenaBusqueda.Location = new System.Drawing.Point(30, 61);
-            this.tbCadenaBusqueda.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.tbCadenaBusqueda.Margin = new System.Windows.Forms.Padding(6);
             this.tbCadenaBusqueda.Name = "tbCadenaBusqueda";
             this.tbCadenaBusqueda.Size = new System.Drawing.Size(390, 37);
             this.tbCadenaBusqueda.TabIndex = 1;
@@ -87,12 +87,13 @@
             this.Controls.Add(this.btBuscar);
             this.Controls.Add(this.btCancelar);
             this.Font = new System.Drawing.Font("Calibri", 18F);
-            this.Margin = new System.Windows.Forms.Padding(6, 6, 6, 6);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(652, 154);
             this.MinimizeBox = false;
             this.MinimumSize = new System.Drawing.Size(652, 154);
             this.Name = "BuscarLlibre";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Tag = "5";
             this.Text = "Buscar Llibre";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.BuscarLlibre_FormClosed);
