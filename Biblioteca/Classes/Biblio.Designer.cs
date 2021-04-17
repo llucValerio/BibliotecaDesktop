@@ -202,6 +202,7 @@
             this.btModificarUbicacions = new System.Windows.Forms.Button();
             this.btAfegirUbicacions = new System.Windows.Forms.Button();
             this.TtBoto = new System.Windows.Forms.ToolTip(this.components);
+            this.btTots = new System.Windows.Forms.Button();
             casaLabel1 = new System.Windows.Forms.Label();
             habitacioLabel1 = new System.Windows.Forms.Label();
             nomLabel = new System.Windows.Forms.Label();
@@ -286,7 +287,7 @@
             // 
             casaLabel1.AutoSize = true;
             casaLabel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            casaLabel1.Location = new System.Drawing.Point(3, 41);
+            casaLabel1.Location = new System.Drawing.Point(3, 43);
             casaLabel1.Name = "casaLabel1";
             casaLabel1.Size = new System.Drawing.Size(106, 19);
             casaLabel1.TabIndex = 2;
@@ -297,10 +298,10 @@
             // 
             habitacioLabel1.AutoSize = true;
             habitacioLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            habitacioLabel1.Location = new System.Drawing.Point(3, 90);
+            habitacioLabel1.Location = new System.Drawing.Point(3, 93);
             habitacioLabel1.Name = "habitacioLabel1";
             this.tlpUbicacions7.SetRowSpan(habitacioLabel1, 2);
-            habitacioLabel1.Size = new System.Drawing.Size(106, 60);
+            habitacioLabel1.Size = new System.Drawing.Size(106, 62);
             habitacioLabel1.TabIndex = 4;
             habitacioLabel1.Text = "Habitacio / Lloc:";
             habitacioLabel1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -309,7 +310,7 @@
             // 
             nomLabel.AutoSize = true;
             nomLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            nomLabel.Location = new System.Drawing.Point(3, 11);
+            nomLabel.Location = new System.Drawing.Point(3, 12);
             nomLabel.Name = "nomLabel";
             nomLabel.Size = new System.Drawing.Size(106, 19);
             nomLabel.TabIndex = 2;
@@ -320,7 +321,7 @@
             // 
             cognomsLabel.AutoSize = true;
             cognomsLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            cognomsLabel.Location = new System.Drawing.Point(3, 41);
+            cognomsLabel.Location = new System.Drawing.Point(3, 43);
             cognomsLabel.Name = "cognomsLabel";
             cognomsLabel.Size = new System.Drawing.Size(106, 19);
             cognomsLabel.TabIndex = 4;
@@ -331,7 +332,7 @@
             // 
             nacionalitatLabel.AutoSize = true;
             nacionalitatLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            nacionalitatLabel.Location = new System.Drawing.Point(3, 71);
+            nacionalitatLabel.Location = new System.Drawing.Point(3, 74);
             nacionalitatLabel.Name = "nacionalitatLabel";
             nacionalitatLabel.Size = new System.Drawing.Size(106, 19);
             nacionalitatLabel.TabIndex = 6;
@@ -342,7 +343,7 @@
             // 
             dataNaixementLabel.AutoSize = true;
             dataNaixementLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
-            dataNaixementLabel.Location = new System.Drawing.Point(3, 101);
+            dataNaixementLabel.Location = new System.Drawing.Point(3, 105);
             dataNaixementLabel.Name = "dataNaixementLabel";
             dataNaixementLabel.Size = new System.Drawing.Size(106, 19);
             dataNaixementLabel.TabIndex = 8;
@@ -353,7 +354,7 @@
             // 
             comentarisLabel1.AutoSize = true;
             comentarisLabel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            comentarisLabel1.Location = new System.Drawing.Point(3, 211);
+            comentarisLabel1.Location = new System.Drawing.Point(3, 217);
             comentarisLabel1.Name = "comentarisLabel1";
             comentarisLabel1.Size = new System.Drawing.Size(106, 94);
             comentarisLabel1.TabIndex = 10;
@@ -365,7 +366,7 @@
             anyLabel.AutoSize = true;
             anyLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             anyLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            anyLabel.Location = new System.Drawing.Point(3, 62);
+            anyLabel.Location = new System.Drawing.Point(3, 63);
             anyLabel.Name = "anyLabel";
             anyLabel.Size = new System.Drawing.Size(106, 30);
             anyLabel.TabIndex = 35;
@@ -377,7 +378,7 @@
             editorLabel.AutoSize = true;
             editorLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             editorLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            editorLabel.Location = new System.Drawing.Point(3, 92);
+            editorLabel.Location = new System.Drawing.Point(3, 93);
             editorLabel.Name = "editorLabel";
             editorLabel.Size = new System.Drawing.Size(106, 30);
             editorLabel.TabIndex = 36;
@@ -389,7 +390,7 @@
             colleccioLabel.AutoSize = true;
             colleccioLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
             colleccioLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            colleccioLabel.Location = new System.Drawing.Point(3, 133);
+            colleccioLabel.Location = new System.Drawing.Point(3, 134);
             colleccioLabel.Name = "colleccioLabel";
             colleccioLabel.Size = new System.Drawing.Size(106, 19);
             colleccioLabel.TabIndex = 37;
@@ -401,7 +402,7 @@
             numEdicioLabel.AutoSize = true;
             numEdicioLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
             numEdicioLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            numEdicioLabel.Location = new System.Drawing.Point(3, 163);
+            numEdicioLabel.Location = new System.Drawing.Point(3, 164);
             numEdicioLabel.Name = "numEdicioLabel";
             numEdicioLabel.Size = new System.Drawing.Size(106, 19);
             numEdicioLabel.TabIndex = 38;
@@ -413,7 +414,7 @@
             tipusCobertaLabel.AutoSize = true;
             tipusCobertaLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
             tipusCobertaLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            tipusCobertaLabel.Location = new System.Drawing.Point(3, 193);
+            tipusCobertaLabel.Location = new System.Drawing.Point(3, 194);
             tipusCobertaLabel.Name = "tipusCobertaLabel";
             tipusCobertaLabel.Size = new System.Drawing.Size(106, 19);
             tipusCobertaLabel.TabIndex = 39;
@@ -425,7 +426,7 @@
             dataCompraLabel.AutoSize = true;
             dataCompraLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
             dataCompraLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataCompraLabel.Location = new System.Drawing.Point(3, 223);
+            dataCompraLabel.Location = new System.Drawing.Point(3, 224);
             dataCompraLabel.Name = "dataCompraLabel";
             dataCompraLabel.Size = new System.Drawing.Size(106, 19);
             dataCompraLabel.TabIndex = 46;
@@ -437,9 +438,9 @@
             numPaginesLabel.AutoSize = true;
             numPaginesLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             numPaginesLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            numPaginesLabel.Location = new System.Drawing.Point(3, 242);
+            numPaginesLabel.Location = new System.Drawing.Point(3, 243);
             numPaginesLabel.Name = "numPaginesLabel";
-            numPaginesLabel.Size = new System.Drawing.Size(106, 32);
+            numPaginesLabel.Size = new System.Drawing.Size(106, 37);
             numPaginesLabel.TabIndex = 47;
             numPaginesLabel.Text = "Num Pag.:";
             numPaginesLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -449,7 +450,7 @@
             casaLabel.AutoSize = true;
             casaLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
             casaLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            casaLabel.Location = new System.Drawing.Point(3, 8);
+            casaLabel.Location = new System.Drawing.Point(3, 9);
             casaLabel.Name = "casaLabel";
             casaLabel.Size = new System.Drawing.Size(106, 19);
             casaLabel.TabIndex = 43;
@@ -461,7 +462,7 @@
             HabitacioLabel.AutoSize = true;
             HabitacioLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
             HabitacioLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            HabitacioLabel.Location = new System.Drawing.Point(3, 35);
+            HabitacioLabel.Location = new System.Drawing.Point(3, 37);
             HabitacioLabel.Name = "HabitacioLabel";
             HabitacioLabel.Size = new System.Drawing.Size(106, 19);
             HabitacioLabel.TabIndex = 47;
@@ -473,9 +474,9 @@
             comentarisLabel.AutoSize = true;
             comentarisLabel.Dock = System.Windows.Forms.DockStyle.Fill;
             comentarisLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            comentarisLabel.Location = new System.Drawing.Point(3, 163);
+            comentarisLabel.Location = new System.Drawing.Point(3, 168);
             comentarisLabel.Name = "comentarisLabel";
-            comentarisLabel.Size = new System.Drawing.Size(106, 111);
+            comentarisLabel.Size = new System.Drawing.Size(106, 112);
             comentarisLabel.TabIndex = 51;
             comentarisLabel.Text = "Coment.:";
             comentarisLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -484,7 +485,7 @@
             // 
             idiomaLabel1.AutoSize = true;
             idiomaLabel1.Dock = System.Windows.Forms.DockStyle.Bottom;
-            idiomaLabel1.Location = new System.Drawing.Point(3, 41);
+            idiomaLabel1.Location = new System.Drawing.Point(3, 43);
             idiomaLabel1.Name = "idiomaLabel1";
             idiomaLabel1.Size = new System.Drawing.Size(106, 19);
             idiomaLabel1.TabIndex = 2;
@@ -496,7 +497,7 @@
             estilLabel.AutoSize = true;
             estilLabel.Dock = System.Windows.Forms.DockStyle.Bottom;
             estilLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            estilLabel.Location = new System.Drawing.Point(3, 41);
+            estilLabel.Location = new System.Drawing.Point(3, 43);
             estilLabel.Name = "estilLabel";
             estilLabel.Size = new System.Drawing.Size(106, 19);
             estilLabel.TabIndex = 29;
@@ -522,7 +523,7 @@
             autorLabel.ForeColor = System.Drawing.SystemColors.ControlText;
             autorLabel.Location = new System.Drawing.Point(61, 0);
             autorLabel.Name = "autorLabel";
-            autorLabel.Size = new System.Drawing.Size(48, 32);
+            autorLabel.Size = new System.Drawing.Size(48, 33);
             autorLabel.TabIndex = 51;
             autorLabel.Text = "Autor:";
             autorLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -532,7 +533,7 @@
             idiomaLabel.AutoSize = true;
             idiomaLabel.Dock = System.Windows.Forms.DockStyle.Right;
             idiomaLabel.ForeColor = System.Drawing.SystemColors.ControlText;
-            idiomaLabel.Location = new System.Drawing.Point(52, 32);
+            idiomaLabel.Location = new System.Drawing.Point(52, 33);
             idiomaLabel.Name = "idiomaLabel";
             idiomaLabel.Size = new System.Drawing.Size(57, 30);
             idiomaLabel.TabIndex = 56;
@@ -543,10 +544,10 @@
             // 
             this.tbLlistats.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tbLlistats.Controls.Add(this.tableLayoutPanel4);
-            this.tbLlistats.Location = new System.Drawing.Point(4, 28);
+            this.tbLlistats.Location = new System.Drawing.Point(4, 22);
             this.tbLlistats.Name = "tbLlistats";
             this.tbLlistats.Padding = new System.Windows.Forms.Padding(3);
-            this.tbLlistats.Size = new System.Drawing.Size(776, 380);
+            this.tbLlistats.Size = new System.Drawing.Size(776, 386);
             this.tbLlistats.TabIndex = 5;
             this.tbLlistats.Text = "DADES";
             this.tbLlistats.UseVisualStyleBackColor = true;
@@ -564,7 +565,7 @@
             this.tableLayoutPanel4.RowCount = 2;
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 85F));
             this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(770, 374);
+            this.tableLayoutPanel4.Size = new System.Drawing.Size(770, 380);
             this.tableLayoutPanel4.TabIndex = 47;
             // 
             // tableLayoutPanel5
@@ -574,7 +575,7 @@
             this.tableLayoutPanel5.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.7F));
             this.tableLayoutPanel5.Controls.Add(this.btTornarLlistats, 1, 0);
             this.tableLayoutPanel5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 320);
+            this.tableLayoutPanel5.Location = new System.Drawing.Point(3, 326);
             this.tableLayoutPanel5.Name = "tableLayoutPanel5";
             this.tableLayoutPanel5.RowCount = 1;
             this.tableLayoutPanel5.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -646,7 +647,7 @@
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tableLayoutPanel6.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tableLayoutPanel6.Size = new System.Drawing.Size(764, 311);
+            this.tableLayoutPanel6.Size = new System.Drawing.Size(764, 317);
             this.tableLayoutPanel6.TabIndex = 1;
             // 
             // label14
@@ -710,7 +711,7 @@
             this.lbNoUtilEstil.Dock = System.Windows.Forms.DockStyle.Left;
             this.lbNoUtilEstil.Location = new System.Drawing.Point(536, 279);
             this.lbNoUtilEstil.Name = "lbNoUtilEstil";
-            this.lbNoUtilEstil.Size = new System.Drawing.Size(17, 32);
+            this.lbNoUtilEstil.Size = new System.Drawing.Size(17, 38);
             this.lbNoUtilEstil.TabIndex = 21;
             this.lbNoUtilEstil.Text = "0";
             this.lbNoUtilEstil.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -787,7 +788,7 @@
             this.lbNoUtilIdioma.Dock = System.Windows.Forms.DockStyle.Left;
             this.lbNoUtilIdioma.Location = new System.Drawing.Point(155, 279);
             this.lbNoUtilIdioma.Name = "lbNoUtilIdioma";
-            this.lbNoUtilIdioma.Size = new System.Drawing.Size(17, 32);
+            this.lbNoUtilIdioma.Size = new System.Drawing.Size(17, 38);
             this.lbNoUtilIdioma.TabIndex = 36;
             this.lbNoUtilIdioma.Text = "0";
             this.lbNoUtilIdioma.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -864,7 +865,7 @@
             this.label18.Dock = System.Windows.Forms.DockStyle.Right;
             this.label18.Location = new System.Drawing.Point(56, 279);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(93, 32);
+            this.label18.Size = new System.Drawing.Size(93, 38);
             this.label18.TabIndex = 13;
             this.label18.Text = "No Utilitzats:";
             this.label18.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -930,7 +931,7 @@
             this.label12.Dock = System.Windows.Forms.DockStyle.Right;
             this.label12.Location = new System.Drawing.Point(437, 279);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(93, 32);
+            this.label12.Size = new System.Drawing.Size(93, 38);
             this.label12.TabIndex = 7;
             this.label12.Text = "No Utilitzats:";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -988,10 +989,10 @@
             this.tbEstils.AutoScroll = true;
             this.tbEstils.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tbEstils.Controls.Add(this.tlpEstils1);
-            this.tbEstils.Location = new System.Drawing.Point(4, 28);
+            this.tbEstils.Location = new System.Drawing.Point(4, 22);
             this.tbEstils.Name = "tbEstils";
             this.tbEstils.Padding = new System.Windows.Forms.Padding(3);
-            this.tbEstils.Size = new System.Drawing.Size(776, 380);
+            this.tbEstils.Size = new System.Drawing.Size(776, 386);
             this.tbEstils.TabIndex = 4;
             this.tbEstils.Text = "ESTILS";
             this.tbEstils.UseVisualStyleBackColor = true;
@@ -1008,7 +1009,7 @@
             this.tlpEstils1.RowCount = 2;
             this.tlpEstils1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 85F));
             this.tlpEstils1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tlpEstils1.Size = new System.Drawing.Size(770, 374);
+            this.tlpEstils1.Size = new System.Drawing.Size(770, 380);
             this.tlpEstils1.TabIndex = 45;
             // 
             // tlpEstils3
@@ -1021,7 +1022,7 @@
             this.tlpEstils3.Controls.Add(this.tlpEstils5, 0, 0);
             this.tlpEstils3.Controls.Add(this.tlpEstils4, 0, 0);
             this.tlpEstils3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpEstils3.Location = new System.Drawing.Point(3, 320);
+            this.tlpEstils3.Location = new System.Drawing.Point(3, 326);
             this.tlpEstils3.Name = "tlpEstils3";
             this.tlpEstils3.RowCount = 1;
             this.tlpEstils3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -1179,7 +1180,7 @@
             this.tlpEstils2.Name = "tlpEstils2";
             this.tlpEstils2.RowCount = 1;
             this.tlpEstils2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpEstils2.Size = new System.Drawing.Size(764, 311);
+            this.tlpEstils2.Size = new System.Drawing.Size(764, 317);
             this.tlpEstils2.TabIndex = 46;
             // 
             // estilDataGridView
@@ -1195,7 +1196,7 @@
             this.estilDataGridView.Location = new System.Drawing.Point(3, 3);
             this.estilDataGridView.Name = "estilDataGridView";
             this.estilDataGridView.ReadOnly = true;
-            this.estilDataGridView.Size = new System.Drawing.Size(376, 305);
+            this.estilDataGridView.Size = new System.Drawing.Size(376, 311);
             this.estilDataGridView.TabIndex = 9;
             this.estilDataGridView.SelectionChanged += new System.EventHandler(this.estilDataGridView_SelectionChanged);
             // 
@@ -1221,13 +1222,13 @@
             this.tlpEstils7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tlpEstils7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tlpEstils7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlpEstils7.Size = new System.Drawing.Size(376, 305);
+            this.tlpEstils7.Size = new System.Drawing.Size(376, 311);
             this.tlpEstils7.TabIndex = 10;
             // 
             // estilTextBox
             // 
             this.estilTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.estilTextBox.Location = new System.Drawing.Point(115, 33);
+            this.estilTextBox.Location = new System.Drawing.Point(115, 34);
             this.estilTextBox.MaxLength = 50;
             this.estilTextBox.Name = "estilTextBox";
             this.estilTextBox.Size = new System.Drawing.Size(258, 27);
@@ -1237,10 +1238,10 @@
             // 
             this.tbIdiomes.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tbIdiomes.Controls.Add(this.tlpIdioma1);
-            this.tbIdiomes.Location = new System.Drawing.Point(4, 28);
+            this.tbIdiomes.Location = new System.Drawing.Point(4, 22);
             this.tbIdiomes.Name = "tbIdiomes";
             this.tbIdiomes.Padding = new System.Windows.Forms.Padding(3);
-            this.tbIdiomes.Size = new System.Drawing.Size(776, 380);
+            this.tbIdiomes.Size = new System.Drawing.Size(776, 386);
             this.tbIdiomes.TabIndex = 2;
             this.tbIdiomes.Text = "IDIOMES";
             this.tbIdiomes.UseVisualStyleBackColor = true;
@@ -1258,7 +1259,7 @@
             this.tlpIdioma1.RowCount = 2;
             this.tlpIdioma1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 85F));
             this.tlpIdioma1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tlpIdioma1.Size = new System.Drawing.Size(770, 374);
+            this.tlpIdioma1.Size = new System.Drawing.Size(770, 380);
             this.tlpIdioma1.TabIndex = 0;
             // 
             // tlpIdioma3
@@ -1271,7 +1272,7 @@
             this.tlpIdioma3.Controls.Add(this.tlpIdioma5, 0, 0);
             this.tlpIdioma3.Controls.Add(this.tlpIdioma4, 0, 0);
             this.tlpIdioma3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpIdioma3.Location = new System.Drawing.Point(3, 320);
+            this.tlpIdioma3.Location = new System.Drawing.Point(3, 326);
             this.tlpIdioma3.Name = "tlpIdioma3";
             this.tlpIdioma3.RowCount = 1;
             this.tlpIdioma3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -1426,7 +1427,7 @@
             this.tlpIdioma2.Name = "tlpIdioma2";
             this.tlpIdioma2.RowCount = 1;
             this.tlpIdioma2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tlpIdioma2.Size = new System.Drawing.Size(764, 311);
+            this.tlpIdioma2.Size = new System.Drawing.Size(764, 317);
             this.tlpIdioma2.TabIndex = 1;
             // 
             // idiomaDataGridView
@@ -1442,7 +1443,7 @@
             this.idiomaDataGridView.Location = new System.Drawing.Point(3, 3);
             this.idiomaDataGridView.Name = "idiomaDataGridView";
             this.idiomaDataGridView.ReadOnly = true;
-            this.idiomaDataGridView.Size = new System.Drawing.Size(376, 305);
+            this.idiomaDataGridView.Size = new System.Drawing.Size(376, 311);
             this.idiomaDataGridView.TabIndex = 6;
             this.idiomaDataGridView.SelectionChanged += new System.EventHandler(this.IdiomaDataGridView_SelectionChanged);
             // 
@@ -1468,13 +1469,13 @@
             this.tlpIdioma7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tlpIdioma7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tlpIdioma7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlpIdioma7.Size = new System.Drawing.Size(376, 305);
+            this.tlpIdioma7.Size = new System.Drawing.Size(376, 311);
             this.tlpIdioma7.TabIndex = 4;
             // 
             // idiomaTextBox
             // 
             this.idiomaTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.idiomaTextBox.Location = new System.Drawing.Point(115, 33);
+            this.idiomaTextBox.Location = new System.Drawing.Point(115, 34);
             this.idiomaTextBox.MaxLength = 50;
             this.idiomaTextBox.Name = "idiomaTextBox";
             this.idiomaTextBox.Size = new System.Drawing.Size(258, 27);
@@ -1484,10 +1485,10 @@
             // 
             this.tbAutors.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tbAutors.Controls.Add(this.tlpAutors1);
-            this.tbAutors.Location = new System.Drawing.Point(4, 28);
+            this.tbAutors.Location = new System.Drawing.Point(4, 22);
             this.tbAutors.Name = "tbAutors";
             this.tbAutors.Padding = new System.Windows.Forms.Padding(3);
-            this.tbAutors.Size = new System.Drawing.Size(776, 380);
+            this.tbAutors.Size = new System.Drawing.Size(776, 386);
             this.tbAutors.TabIndex = 1;
             this.tbAutors.Text = "AUTORS";
             this.tbAutors.UseVisualStyleBackColor = true;
@@ -1505,7 +1506,7 @@
             this.tlpAutors1.RowCount = 2;
             this.tlpAutors1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 85F));
             this.tlpAutors1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tlpAutors1.Size = new System.Drawing.Size(770, 374);
+            this.tlpAutors1.Size = new System.Drawing.Size(770, 380);
             this.tlpAutors1.TabIndex = 0;
             // 
             // tlpAutors3
@@ -1518,7 +1519,7 @@
             this.tlpAutors3.Controls.Add(this.tlpAutors5, 0, 0);
             this.tlpAutors3.Controls.Add(this.tlpAutors4, 0, 0);
             this.tlpAutors3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpAutors3.Location = new System.Drawing.Point(3, 320);
+            this.tlpAutors3.Location = new System.Drawing.Point(3, 326);
             this.tlpAutors3.Name = "tlpAutors3";
             this.tlpAutors3.RowCount = 1;
             this.tlpAutors3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -1678,7 +1679,7 @@
             this.tlpAutors2.RowCount = 1;
             this.tlpAutors2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpAutors2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpAutors2.Size = new System.Drawing.Size(764, 311);
+            this.tlpAutors2.Size = new System.Drawing.Size(764, 317);
             this.tlpAutors2.TabIndex = 1;
             // 
             // autorsDataGridView
@@ -1694,7 +1695,7 @@
             this.autorsDataGridView.Location = new System.Drawing.Point(3, 3);
             this.autorsDataGridView.Name = "autorsDataGridView";
             this.autorsDataGridView.ReadOnly = true;
-            this.autorsDataGridView.Size = new System.Drawing.Size(376, 305);
+            this.autorsDataGridView.Size = new System.Drawing.Size(376, 311);
             this.autorsDataGridView.TabIndex = 5;
             this.autorsDataGridView.SelectionChanged += new System.EventHandler(this.AutorsDataGridView_SelectionChanged);
             // 
@@ -1726,7 +1727,7 @@
             this.tlpAutors7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tlpAutors7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 30F));
             this.tlpAutors7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpAutors7.Size = new System.Drawing.Size(376, 305);
+            this.tlpAutors7.Size = new System.Drawing.Size(376, 311);
             this.tlpAutors7.TabIndex = 4;
             // 
             // nomTextBox
@@ -1743,7 +1744,7 @@
             // 
             this.cognomsTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.cognomsTextBox.Enabled = false;
-            this.cognomsTextBox.Location = new System.Drawing.Point(115, 33);
+            this.cognomsTextBox.Location = new System.Drawing.Point(115, 34);
             this.cognomsTextBox.MaxLength = 50;
             this.cognomsTextBox.Name = "cognomsTextBox";
             this.cognomsTextBox.Size = new System.Drawing.Size(258, 27);
@@ -1753,7 +1754,7 @@
             // 
             this.nacionalitatTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.nacionalitatTextBox.Enabled = false;
-            this.nacionalitatTextBox.Location = new System.Drawing.Point(115, 63);
+            this.nacionalitatTextBox.Location = new System.Drawing.Point(115, 65);
             this.nacionalitatTextBox.MaxLength = 50;
             this.nacionalitatTextBox.Name = "nacionalitatTextBox";
             this.nacionalitatTextBox.Size = new System.Drawing.Size(258, 27);
@@ -1764,7 +1765,7 @@
             this.dataNaixementDateTimePicker.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dataNaixementDateTimePicker.Enabled = false;
             this.dataNaixementDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dataNaixementDateTimePicker.Location = new System.Drawing.Point(115, 93);
+            this.dataNaixementDateTimePicker.Location = new System.Drawing.Point(115, 96);
             this.dataNaixementDateTimePicker.Name = "dataNaixementDateTimePicker";
             this.dataNaixementDateTimePicker.Size = new System.Drawing.Size(258, 27);
             this.dataNaixementDateTimePicker.TabIndex = 43;
@@ -1773,7 +1774,7 @@
             // comentarisAutorsTextBox
             // 
             this.comentarisAutorsTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comentarisAutorsTextBox.Location = new System.Drawing.Point(115, 214);
+            this.comentarisAutorsTextBox.Location = new System.Drawing.Point(115, 220);
             this.comentarisAutorsTextBox.MaxLength = 65535;
             this.comentarisAutorsTextBox.Multiline = true;
             this.comentarisAutorsTextBox.Name = "comentarisAutorsTextBox";
@@ -1786,9 +1787,9 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label2.Location = new System.Drawing.Point(3, 120);
+            this.label2.Location = new System.Drawing.Point(3, 124);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(106, 91);
+            this.label2.Size = new System.Drawing.Size(106, 93);
             this.label2.TabIndex = 12;
             this.label2.Text = "Estils:";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -1796,12 +1797,12 @@
             // estilAutorsTextBox
             // 
             this.estilAutorsTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.estilAutorsTextBox.Location = new System.Drawing.Point(115, 123);
+            this.estilAutorsTextBox.Location = new System.Drawing.Point(115, 127);
             this.estilAutorsTextBox.Multiline = true;
             this.estilAutorsTextBox.Name = "estilAutorsTextBox";
             this.estilAutorsTextBox.ReadOnly = true;
             this.estilAutorsTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.estilAutorsTextBox.Size = new System.Drawing.Size(258, 85);
+            this.estilAutorsTextBox.Size = new System.Drawing.Size(258, 87);
             this.estilAutorsTextBox.TabIndex = 110;
             this.estilAutorsTextBox.Click += new System.EventHandler(this.estilAutorsTextBox_Click);
             // 
@@ -1810,10 +1811,10 @@
             this.tbLlibres.AutoScroll = true;
             this.tbLlibres.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tbLlibres.Controls.Add(this.tlpLlibres1);
-            this.tbLlibres.Location = new System.Drawing.Point(4, 28);
+            this.tbLlibres.Location = new System.Drawing.Point(4, 22);
             this.tbLlibres.Name = "tbLlibres";
             this.tbLlibres.Padding = new System.Windows.Forms.Padding(3);
-            this.tbLlibres.Size = new System.Drawing.Size(776, 380);
+            this.tbLlibres.Size = new System.Drawing.Size(776, 386);
             this.tbLlibres.TabIndex = 0;
             this.tbLlibres.Text = "LLIBRES";
             this.tbLlibres.UseVisualStyleBackColor = true;
@@ -1831,7 +1832,7 @@
             this.tlpLlibres1.RowCount = 2;
             this.tlpLlibres1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 85F));
             this.tlpLlibres1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tlpLlibres1.Size = new System.Drawing.Size(770, 374);
+            this.tlpLlibres1.Size = new System.Drawing.Size(770, 380);
             this.tlpLlibres1.TabIndex = 48;
             // 
             // tlpLlibres3
@@ -1844,7 +1845,7 @@
             this.tlpLlibres3.Controls.Add(this.tlpLlibres5, 0, 0);
             this.tlpLlibres3.Controls.Add(this.tlpLlibres4, 0, 0);
             this.tlpLlibres3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpLlibres3.Location = new System.Drawing.Point(3, 320);
+            this.tlpLlibres3.Location = new System.Drawing.Point(3, 326);
             this.tlpLlibres3.Name = "tlpLlibres3";
             this.tlpLlibres3.RowCount = 1;
             this.tlpLlibres3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -2005,7 +2006,7 @@
             this.tlpLlibres2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tlpLlibres2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90F));
             this.tlpLlibres2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpLlibres2.Size = new System.Drawing.Size(764, 311);
+            this.tlpLlibres2.Size = new System.Drawing.Size(764, 317);
             this.tlpLlibres2.TabIndex = 49;
             // 
             // tlpLlibres8
@@ -2045,7 +2046,7 @@
             this.tlpLlibres8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11F));
             this.tlpLlibres8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11F));
             this.tlpLlibres8.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11F));
-            this.tlpLlibres8.Size = new System.Drawing.Size(376, 274);
+            this.tlpLlibres8.Size = new System.Drawing.Size(376, 280);
             this.tlpLlibres8.TabIndex = 53;
             // 
             // cbIdiomaLlibres
@@ -2055,7 +2056,7 @@
             this.cbIdiomaLlibres.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbIdiomaLlibres.FormattingEnabled = true;
             this.cbIdiomaLlibres.IntegralHeight = false;
-            this.cbIdiomaLlibres.Location = new System.Drawing.Point(115, 35);
+            this.cbIdiomaLlibres.Location = new System.Drawing.Point(115, 36);
             this.cbIdiomaLlibres.Name = "cbIdiomaLlibres";
             this.cbIdiomaLlibres.Size = new System.Drawing.Size(258, 27);
             this.cbIdiomaLlibres.TabIndex = 22;
@@ -2076,7 +2077,7 @@
             // 
             this.anyDateTimePicker.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.anyDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.anyDateTimePicker.Location = new System.Drawing.Point(115, 65);
+            this.anyDateTimePicker.Location = new System.Drawing.Point(115, 66);
             this.anyDateTimePicker.Name = "anyDateTimePicker";
             this.anyDateTimePicker.Size = new System.Drawing.Size(258, 27);
             this.anyDateTimePicker.TabIndex = 23;
@@ -2085,7 +2086,7 @@
             // editorTextBox
             // 
             this.editorTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.editorTextBox.Location = new System.Drawing.Point(115, 95);
+            this.editorTextBox.Location = new System.Drawing.Point(115, 96);
             this.editorTextBox.MaxLength = 50;
             this.editorTextBox.Name = "editorTextBox";
             this.editorTextBox.Size = new System.Drawing.Size(258, 27);
@@ -2094,7 +2095,7 @@
             // colleccioTextBox
             // 
             this.colleccioTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.colleccioTextBox.Location = new System.Drawing.Point(115, 125);
+            this.colleccioTextBox.Location = new System.Drawing.Point(115, 126);
             this.colleccioTextBox.MaxLength = 50;
             this.colleccioTextBox.Name = "colleccioTextBox";
             this.colleccioTextBox.Size = new System.Drawing.Size(258, 27);
@@ -2103,7 +2104,7 @@
             // numEdicioTextBox
             // 
             this.numEdicioTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.numEdicioTextBox.Location = new System.Drawing.Point(115, 155);
+            this.numEdicioTextBox.Location = new System.Drawing.Point(115, 156);
             this.numEdicioTextBox.Name = "numEdicioTextBox";
             this.numEdicioTextBox.Size = new System.Drawing.Size(258, 27);
             this.numEdicioTextBox.TabIndex = 26;
@@ -2112,7 +2113,7 @@
             // tipusCobertaTextBox
             // 
             this.tipusCobertaTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.tipusCobertaTextBox.Location = new System.Drawing.Point(115, 185);
+            this.tipusCobertaTextBox.Location = new System.Drawing.Point(115, 186);
             this.tipusCobertaTextBox.MaxLength = 50;
             this.tipusCobertaTextBox.Name = "tipusCobertaTextBox";
             this.tipusCobertaTextBox.Size = new System.Drawing.Size(258, 27);
@@ -2122,7 +2123,7 @@
             // 
             this.dataCompraDateTimePicker.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.dataCompraDateTimePicker.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dataCompraDateTimePicker.Location = new System.Drawing.Point(115, 215);
+            this.dataCompraDateTimePicker.Location = new System.Drawing.Point(115, 216);
             this.dataCompraDateTimePicker.Name = "dataCompraDateTimePicker";
             this.dataCompraDateTimePicker.Size = new System.Drawing.Size(258, 27);
             this.dataCompraDateTimePicker.TabIndex = 28;
@@ -2131,7 +2132,7 @@
             // numPaginesTextBox
             // 
             this.numPaginesTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.numPaginesTextBox.Location = new System.Drawing.Point(115, 245);
+            this.numPaginesTextBox.Location = new System.Drawing.Point(115, 250);
             this.numPaginesTextBox.Name = "numPaginesTextBox";
             this.numPaginesTextBox.Size = new System.Drawing.Size(258, 27);
             this.numPaginesTextBox.TabIndex = 29;
@@ -2158,7 +2159,7 @@
             this.tlpLlibres7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tlpLlibres7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
             this.tlpLlibres7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 40F));
-            this.tlpLlibres7.Size = new System.Drawing.Size(376, 274);
+            this.tlpLlibres7.Size = new System.Drawing.Size(376, 280);
             this.tlpLlibres7.TabIndex = 54;
             // 
             // cbLocalitzacio
@@ -2179,7 +2180,7 @@
             // 
             this.habitacioTextBox.Dock = System.Windows.Forms.DockStyle.Top;
             this.habitacioTextBox.Enabled = false;
-            this.habitacioTextBox.Location = new System.Drawing.Point(115, 30);
+            this.habitacioTextBox.Location = new System.Drawing.Point(115, 31);
             this.habitacioTextBox.MaxLength = 255;
             this.habitacioTextBox.Name = "habitacioTextBox";
             this.habitacioTextBox.Size = new System.Drawing.Size(258, 27);
@@ -2188,24 +2189,24 @@
             // comentarisTextBox
             // 
             this.comentarisTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comentarisTextBox.Location = new System.Drawing.Point(115, 166);
+            this.comentarisTextBox.Location = new System.Drawing.Point(115, 171);
             this.comentarisTextBox.MaxLength = 65535;
             this.comentarisTextBox.Multiline = true;
             this.comentarisTextBox.Name = "comentarisTextBox";
             this.comentarisTextBox.ReadOnly = true;
             this.comentarisTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.comentarisTextBox.Size = new System.Drawing.Size(258, 105);
+            this.comentarisTextBox.Size = new System.Drawing.Size(258, 106);
             this.comentarisTextBox.TabIndex = 31;
             // 
             // estilLlibreTextBox
             // 
             this.estilLlibreTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.estilLlibreTextBox.Location = new System.Drawing.Point(115, 57);
+            this.estilLlibreTextBox.Location = new System.Drawing.Point(115, 59);
             this.estilLlibreTextBox.Multiline = true;
             this.estilLlibreTextBox.Name = "estilLlibreTextBox";
             this.estilLlibreTextBox.ReadOnly = true;
             this.estilLlibreTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.estilLlibreTextBox.Size = new System.Drawing.Size(258, 103);
+            this.estilLlibreTextBox.Size = new System.Drawing.Size(258, 106);
             this.estilLlibreTextBox.TabIndex = 101;
             this.estilLlibreTextBox.Click += new System.EventHandler(this.EstilLlibreTextBox_Click);
             // 
@@ -2213,9 +2214,9 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.label1.Location = new System.Drawing.Point(3, 54);
+            this.label1.Location = new System.Drawing.Point(3, 56);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(106, 109);
+            this.label1.Size = new System.Drawing.Size(106, 112);
             this.label1.TabIndex = 57;
             this.label1.Text = "Estils:";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
@@ -2297,6 +2298,7 @@
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
             this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+            this.tableLayoutPanel2.Controls.Add(this.btTots, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.btBuscar, 0, 0);
             this.tableLayoutPanel2.Controls.Add(this.btSortir, 2, 0);
             this.tableLayoutPanel2.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -2422,10 +2424,10 @@
             // 
             this.tbUbicacions.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.tbUbicacions.Controls.Add(this.tlpUbicacions1);
-            this.tbUbicacions.Location = new System.Drawing.Point(4, 28);
+            this.tbUbicacions.Location = new System.Drawing.Point(4, 22);
             this.tbUbicacions.Name = "tbUbicacions";
             this.tbUbicacions.Padding = new System.Windows.Forms.Padding(3);
-            this.tbUbicacions.Size = new System.Drawing.Size(776, 380);
+            this.tbUbicacions.Size = new System.Drawing.Size(776, 386);
             this.tbUbicacions.TabIndex = 3;
             this.tbUbicacions.Text = "UBICACIONS";
             this.tbUbicacions.UseVisualStyleBackColor = true;
@@ -2443,7 +2445,7 @@
             this.tlpUbicacions1.RowCount = 2;
             this.tlpUbicacions1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 85F));
             this.tlpUbicacions1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 15F));
-            this.tlpUbicacions1.Size = new System.Drawing.Size(770, 374);
+            this.tlpUbicacions1.Size = new System.Drawing.Size(770, 380);
             this.tlpUbicacions1.TabIndex = 0;
             // 
             // tlpUbicacions2
@@ -2459,7 +2461,7 @@
             this.tlpUbicacions2.RowCount = 1;
             this.tlpUbicacions2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tlpUbicacions2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tlpUbicacions2.Size = new System.Drawing.Size(764, 311);
+            this.tlpUbicacions2.Size = new System.Drawing.Size(764, 317);
             this.tlpUbicacions2.TabIndex = 0;
             // 
             // localitzacioDataGridView
@@ -2475,7 +2477,7 @@
             this.localitzacioDataGridView.Location = new System.Drawing.Point(3, 3);
             this.localitzacioDataGridView.Name = "localitzacioDataGridView";
             this.localitzacioDataGridView.ReadOnly = true;
-            this.localitzacioDataGridView.Size = new System.Drawing.Size(376, 305);
+            this.localitzacioDataGridView.Size = new System.Drawing.Size(376, 311);
             this.localitzacioDataGridView.TabIndex = 3;
             this.localitzacioDataGridView.SelectionChanged += new System.EventHandler(this.localitzacioDataGridView_SelectionChanged);
             // 
@@ -2503,25 +2505,25 @@
             this.tlpUbicacions7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tlpUbicacions7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.tlpUbicacions7.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.tlpUbicacions7.Size = new System.Drawing.Size(376, 305);
+            this.tlpUbicacions7.Size = new System.Drawing.Size(376, 311);
             this.tlpUbicacions7.TabIndex = 3;
             // 
             // LlocTextBox
             // 
             this.LlocTextBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.LlocTextBox.Location = new System.Drawing.Point(115, 93);
+            this.LlocTextBox.Location = new System.Drawing.Point(115, 96);
             this.LlocTextBox.MaxLength = 255;
             this.LlocTextBox.Multiline = true;
             this.LlocTextBox.Name = "LlocTextBox";
             this.tlpUbicacions7.SetRowSpan(this.LlocTextBox, 2);
             this.LlocTextBox.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.LlocTextBox.Size = new System.Drawing.Size(258, 54);
+            this.LlocTextBox.Size = new System.Drawing.Size(258, 56);
             this.LlocTextBox.TabIndex = 71;
             // 
             // casaTextBox
             // 
             this.casaTextBox.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.casaTextBox.Location = new System.Drawing.Point(115, 33);
+            this.casaTextBox.Location = new System.Drawing.Point(115, 34);
             this.casaTextBox.MaxLength = 50;
             this.casaTextBox.Name = "casaTextBox";
             this.casaTextBox.Size = new System.Drawing.Size(258, 27);
@@ -2537,7 +2539,7 @@
             this.tlpUbicacions3.Controls.Add(this.tlpUbicacions5, 0, 0);
             this.tlpUbicacions3.Controls.Add(this.tlpUbicacions4, 0, 0);
             this.tlpUbicacions3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tlpUbicacions3.Location = new System.Drawing.Point(3, 320);
+            this.tlpUbicacions3.Location = new System.Drawing.Point(3, 326);
             this.tlpUbicacions3.Name = "tlpUbicacions3";
             this.tlpUbicacions3.RowCount = 1;
             this.tlpUbicacions3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -2685,6 +2687,21 @@
             this.TtBoto.SetToolTip(this.btAfegirUbicacions, "AFEGIR");
             this.btAfegirUbicacions.UseVisualStyleBackColor = true;
             this.btAfegirUbicacions.Click += new System.EventHandler(this.btAfegirUbicacions_Click);
+            // 
+            // btTots
+            // 
+            this.btTots.AutoSize = true;
+            this.btTots.BackgroundImage = global::Biblioteca.Properties.Resources.buscar;
+            this.btTots.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btTots.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btTots.Location = new System.Drawing.Point(259, 3);
+            this.btTots.Name = "btTots";
+            this.btTots.Size = new System.Drawing.Size(250, 45);
+            this.btTots.TabIndex = 3;
+            this.btTots.Tag = "BUSCAR LLIBRE";
+            this.TtBoto.SetToolTip(this.btTots, "BUSCAR LLIBRE");
+            this.btTots.UseVisualStyleBackColor = true;
+            this.btTots.Click += new System.EventHandler(this.btTots_Click);
             // 
             // Biblio
             // 
@@ -2939,6 +2956,7 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Button btTots;
     }
 }
 

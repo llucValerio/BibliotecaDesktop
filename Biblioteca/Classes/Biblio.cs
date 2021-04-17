@@ -427,6 +427,32 @@ namespace Biblioteca
                 formBusqueda.Close();
             }
         }
+        private void btTots_Click(object sender, EventArgs e)
+        {
+            //Bloquegem el refresc del grid
+            dtLlibresAct = false;
+            //
+            DtBusquedaLlibre.Clear();
+            stringSql = "SELECT * FROM LLIBRE ORDER BY Titol;";
+            bbddConn.GetData(stringSql, ref DtBusquedaLlibre);
+            llibreDataGridView.DataSource = DtBusquedaLlibre;
+            //
+            // Ocultem les columnes del grid que no ens interessen
+            this.llibreDataGridView.Columns["Any"].Visible = false;
+            this.llibreDataGridView.Columns["Editor"].Visible = false;
+            this.llibreDataGridView.Columns["Colleccio"].Visible = false;
+            this.llibreDataGridView.Columns["NumEdicio"].Visible = false;
+            this.llibreDataGridView.Columns["TipusCoberta"].Visible = false;
+            this.llibreDataGridView.Columns["DataCompra"].Visible = false;
+            this.llibreDataGridView.Columns["NumPagines"].Visible = false;
+            this.llibreDataGridView.Columns["Comentaris"].Visible = false;
+            this.llibreDataGridView.Columns["IdLlibre"].Visible = false;
+            this.llibreDataGridView.Columns["IdIdioma"].Visible = false;
+            this.llibreDataGridView.Columns["IdLocalitzacio"].Visible = false;
+            //
+            dtLlibresAct = true;
+            lbllibresTrobats.Text = DtBusquedaLlibre.Rows.Count.ToString();
+        }
         private void BtSortir_Click(object sender, EventArgs e)
         {
             Application.Exit();
@@ -686,32 +712,32 @@ namespace Biblioteca
                                             }
                                             if (resultatProv)
                                             {
-                                                MessageBox.Show("Llibre, autor i estils afegits correctament.", "Insertar Llibre", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                                MessageBox.Show("Llibre, autor i estils modificats correctament.", "Insertar Llibre", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                             }
                                             else
                                             {
-                                                MessageBox.Show("Hi ha hagut un problema insertant els estils del llibre.", "Insertar Llibre", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                                MessageBox.Show("Hi ha hagut un problema modificant els estils del llibre.", "Insertar Llibre", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                             }
                                         }
                                         else
                                         {
-                                            MessageBox.Show("Llibre i autor afegits correctament.", "Insertar Llibre", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                            MessageBox.Show("Llibre i autor modificats correctament.", "Insertar Llibre", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                         }
                                     }
                                     else
                                     {
-                                        MessageBox.Show("Hi ha hagut un problema insertant l'autor del llibre.", "Insertar Llibre", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        MessageBox.Show("Hi ha hagut un problema modificant l'autor del llibre.", "Insertar Llibre", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     }
                                 }
                                 else
                                 {
                                     if (resultat != 1)
                                     {
-                                        MessageBox.Show("Hi ha hagut un problema al registrar els estils del llibre.", "Modificar Llibre", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        MessageBox.Show("Hi ha hagut un problema al modificar els estils del llibre.", "Modificar Llibre", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     }
                                     else
                                     {
-                                        MessageBox.Show("Hi ha hagut un problema al registrar l'autor del llibre.", "Modificar Llibre", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                        MessageBox.Show("Hi ha hagut un problema al modificar l'autor del llibre.", "Modificar Llibre", MessageBoxButtons.OK, MessageBoxIcon.Information);
                                     }
                                 }
                             }
