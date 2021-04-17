@@ -7,7 +7,7 @@
     <ProjectGuid>{35621BB0-9CF8-4AC0-AC9D-98906E8A15BD}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Biblioteca</RootNamespace>
-    <AssemblyName>Biblioteca</AssemblyName>
+    <AssemblyName>Biblioteca2.0</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -137,11 +137,14 @@
     <None Include="Resources\BarnaStaPauFons.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\2102998941582799504-256.png" />
     <Content Include="Resources\afegir.png" />
     <Content Include="Resources\Biblioteca2020.accdb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Resources\buscar.png" />
+    <None Include="Resources\buscarTots.bmp" />
+    <None Include="Resources\buscarTots.png" />
     <Content Include="Resources\cancelar.png" />
     <Content Include="Resources\eliminar.png" />
     <Content Include="Resources\guardar.png" />

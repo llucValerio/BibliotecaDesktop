@@ -176,6 +176,7 @@
             this.tbInici = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.btTots = new System.Windows.Forms.Button();
             this.btBuscar = new System.Windows.Forms.Button();
             this.btSortir = new System.Windows.Forms.Button();
             this.llibreDataGridView = new System.Windows.Forms.DataGridView();
@@ -202,7 +203,6 @@
             this.btModificarUbicacions = new System.Windows.Forms.Button();
             this.btAfegirUbicacions = new System.Windows.Forms.Button();
             this.TtBoto = new System.Windows.Forms.ToolTip(this.components);
-            this.btTots = new System.Windows.Forms.Button();
             casaLabel1 = new System.Windows.Forms.Label();
             habitacioLabel1 = new System.Windows.Forms.Label();
             nomLabel = new System.Windows.Forms.Label();
@@ -2309,6 +2309,21 @@
             this.tableLayoutPanel2.Size = new System.Drawing.Size(770, 51);
             this.tableLayoutPanel2.TabIndex = 59;
             // 
+            // btTots
+            // 
+            this.btTots.AutoSize = true;
+            this.btTots.BackgroundImage = global::Biblioteca.Properties.Resources.buscarTots;
+            this.btTots.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btTots.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btTots.Location = new System.Drawing.Point(259, 3);
+            this.btTots.Name = "btTots";
+            this.btTots.Size = new System.Drawing.Size(250, 45);
+            this.btTots.TabIndex = 3;
+            this.btTots.Tag = "BUSCAR LLIBRE";
+            this.TtBoto.SetToolTip(this.btTots, "BUSCAR LLIBRE");
+            this.btTots.UseVisualStyleBackColor = true;
+            this.btTots.Click += new System.EventHandler(this.btTots_Click);
+            // 
             // btBuscar
             // 
             this.btBuscar.AutoSize = true;
@@ -2687,21 +2702,6 @@
             this.TtBoto.SetToolTip(this.btAfegirUbicacions, "AFEGIR");
             this.btAfegirUbicacions.UseVisualStyleBackColor = true;
             this.btAfegirUbicacions.Click += new System.EventHandler(this.btAfegirUbicacions_Click);
-            // 
-            // btTots
-            // 
-            this.btTots.AutoSize = true;
-            this.btTots.BackgroundImage = global::Biblioteca.Properties.Resources.buscar;
-            this.btTots.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btTots.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btTots.Location = new System.Drawing.Point(259, 3);
-            this.btTots.Name = "btTots";
-            this.btTots.Size = new System.Drawing.Size(250, 45);
-            this.btTots.TabIndex = 3;
-            this.btTots.Tag = "BUSCAR LLIBRE";
-            this.TtBoto.SetToolTip(this.btTots, "BUSCAR LLIBRE");
-            this.btTots.UseVisualStyleBackColor = true;
-            this.btTots.Click += new System.EventHandler(this.btTots_Click);
             // 
             // Biblio
             // 
