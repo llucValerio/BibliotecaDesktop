@@ -1963,9 +1963,15 @@ namespace Biblioteca
             stringSql = "SELECT * FROM LLIBRE ORDER BY Titol";
             bbddConn.GetData(stringSql,ref DtLlibre);
             //
+            DtBusquedaLlibre.Clear();
+            //
             DtEstilLlibre.Clear();
             stringSql = "SELECT * FROM ESTIL_LLIBRE";
             bbddConn.GetData(stringSql, ref DtEstilLlibre);
+            //
+            DtEstilAutor.Clear();
+            stringSql = "SELECT * FROM AUTOR_LLIBRE";
+            bbddConn.GetData(stringSql, ref DtEstilAutor);
             //
             llibreDataGridView.CurrentCell = null;
             dtEstilsLlibreAct = true;
